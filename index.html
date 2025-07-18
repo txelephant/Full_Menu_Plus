@@ -7,12 +7,14 @@
   <style>
     body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; }
     header { background: #333; color: white; padding: 1rem; text-align: center; }
+    .controls { padding: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
+    .controls input,
+    .controls select { padding: 0.5rem; font-size: 1rem; }
     .restaurant-list { display: flex; flex-wrap: wrap; padding: 1rem; }
     .restaurant-card { background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin: 1rem; padding: 1rem; flex: 1 1 300px; }
     .menu-item { margin-bottom: 1rem; }
     .menu-item h4 { margin: 0 0 0.25rem; }
     .ingredients { font-size: 0.9rem; color: #555; }
-    select { margin: 1rem; padding: 0.5rem; }
   </style>
 </head>
 <body>
@@ -21,9 +23,12 @@
   </header>
 
   <main>
-    <select id="restaurantSelect">
-      <option value="">-- Select a Restaurant --</option>
-    </select>
+    <div class="controls">
+      <input type="text" id="restaurantSearch" placeholder="Search restaurants..." />
+      <select id="restaurantSelect">
+        <option value="">-- Select a Restaurant --</option>
+      </select>
+    </div>
     <div class="restaurant-list" id="menuContainer"></div>
   </main>
 
@@ -68,23 +73,22 @@
       }
     ];
 
+    const searchInput = document.getElementById('restaurantSearch');
     const select = document.getElementById('restaurantSelect');
     const menuContainer = document.getElementById('menuContainer');
 
-    // Populate dropdown
-    data.forEach(r => {
-      const opt = document.createElement('option');
-      opt.value = r.id;
-      opt.textContent = r.name;
-      select.appendChild(opt);
-    });
+    // Populate dropdown based on provided list
+    function populateDropdown(restaurants) {
+      select.innerHTML = '<option value="">-- Select a Restaurant --</option>';
+      restaurants.forEach(r => {
+        const opt = document.createElement('option');
+        opt.value = r.id;
+        opt.textContent = r.name;
+        select.appendChild(opt);
+      });
+    }
 
-    // Listen for selection
-    select.addEventListener('change', e => {
-      const selected = data.find(r => r.id === e.target.value);
-      renderMenu(selected);
-    });
-
+    // Render the menu for a selected restaurant
     function renderMenu(restaurant) {
       menuContainer.innerHTML = '';
       if (!restaurant) return;
@@ -101,7 +105,23 @@
         menuContainer.appendChild(card);
       });
     }
+
+    // Initial population
+    populateDropdown(data);
+
+    // Handle restaurant selection change
+    select.addEventListener('change', e => {
+      const selected = data.find(r => r.id === e.target.value);
+      renderMenu(selected);
+    });
+
+    // Filter restaurants as user types
+    searchInput.addEventListener('input', e => {
+      const query = e.target.value.toLowerCase();
+      const filtered = data.filter(r => r.name.toLowerCase().includes(query));
+      populateDropdown(filtered);
+      menuContainer.innerHTML = '';
+    });
   </script>
 </body>
 </html>
-
