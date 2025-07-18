@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Restaurant Menus</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; }
+    header { background: #333; color: white; padding: 1rem; text-align: center; }
+    .restaurant-list { display: flex; flex-wrap: wrap; padding: 1rem; }
+    .restaurant-card { background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin: 1rem; padding: 1rem; flex: 1 1 300px; }
+    .menu-item { margin-bottom: 1rem; }
+    .menu-item h4 { margin: 0 0 0.25rem; }
+    .ingredients { font-size: 0.9rem; color: #555; }
+    select { margin: 1rem; padding: 0.5rem; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Restaurant Menus</h1>
+  </header>
+
+  <main>
+    <select id="restaurantSelect">
+      <option value="">-- Select a Restaurant --</option>
+    </select>
+    <div class="restaurant-list" id="menuContainer"></div>
+  </main>
+
+  <script>
+    // Sample data structure: restaurants with full ingredients list
+    const data = [
+      {
+        id: 'deli-delights',
+        name: 'Deli Delights',
+        menu: [
+          {
+            name: 'Turkey Club Sandwich',
+            description: 'Classic turkey club with bacon and veggies',
+            ingredients: ['Turkey breast', 'Bacon', 'Lettuce', 'Tomato', 'Mayonnaise', 'Cheddar cheese'],
+            price: 10.99
+          },
+          {
+            name: 'Veggie Wrap',
+            description: 'Fresh veggies wrapped in whole wheat tortilla',
+            ingredients: ['Spinach tortilla', 'Avocado', 'Cucumber', 'Bell peppers', 'Hummus'],
+            price: 8.49
+          }
+        ]
+      },
+      {
+        id: 'pasta-palace',
+        name: 'Pasta Palace',
+        menu: [
+          {
+            name: 'Spaghetti Bolognese',
+            description: 'Hearty meat sauce over spaghetti',
+            ingredients: ['Spaghetti', 'Ground beef', 'Tomato sauce', 'Onion', 'Garlic', 'Parmesan cheese'],
+            price: 12.99
+          },
+          {
+            name: 'Fettuccine Alfredo',
+            description: 'Creamy Alfredo sauce with fettuccine',
+            ingredients: ['Fettuccine', 'Butter', 'Heavy cream', 'Parmesan cheese', 'Nutmeg'],
+            price: 11.49
+          }
+        ]
+      }
+    ];
+
+    const select = document.getElementById('restaurantSelect');
+    const menuContainer = document.getElementById('menuContainer');
+
+    // Populate dropdown
+    data.forEach(r => {
+      const opt = document.createElement('option');
+      opt.value = r.id;
+      opt.textContent = r.name;
+      select.appendChild(opt);
+    });
+
+    // Listen for selection
+    select.addEventListener('change', e => {
+      const selected = data.find(r => r.id === e.target.value);
+      renderMenu(selected);
+    });
+
+    function renderMenu(restaurant) {
+      menuContainer.innerHTML = '';
+      if (!restaurant) return;
+      restaurant.menu.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'restaurant-card';
+        card.innerHTML = `
+          <div class="menu-item">
+            <h3>${item.name} - $${item.price.toFixed(2)}</h3>
+            <p>${item.description}</p>
+            <p class="ingredients"><strong>Ingredients:</strong> ${item.ingredients.join(', ')}</p>
+          </div>
+        `;
+        menuContainer.appendChild(card);
+      });
+    }
+  </script>
+</body>
+</html>
+
