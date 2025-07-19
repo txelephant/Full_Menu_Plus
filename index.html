@@ -18,7 +18,18 @@
   <p class="tagline">Full ingredient lists for Brownsville eateries</p>
   <main>
     <div class="search-container">
-      <input id="restaurantSearch" placeholder="Search restaurants…" autocomplete="off" />
+      <!-- Restaurant name search -->
+      <input
+        id="restaurantSearch"
+        placeholder="Search restaurants…"
+        autocomplete="off"
+      />
+      <!-- Ingredient filter search -->
+      <input
+        id="ingredientSearch"
+        placeholder="Filter by ingredient…"
+        autocomplete="off"
+      />
       <div id="suggestions" class="suggestions"></div>
     </div>
     <div id="menuContainer" class="restaurant-list"></div>
