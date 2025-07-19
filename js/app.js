@@ -1,171 +1,151 @@
-// js/app.js  — auto‑discovers restaurant files listed in data/index.json
+// app.js
+// Auto‑discovers restaurant files listed in data/index.json
 (async () => {
-  const dataFolder = 'data/';
+  const dataFolder    = 'data/';
+  const indexUrl      = `${dataFolder}index.json`;
+  let restaurantFiles = [];
 
-  /* 1. Fetch the master index --------------------------------------- */
-  let fileList = [];
+  // 1. Load master index
   try {
-    fileList = await fetch(`${dataFolder}index.json`).then(r => {
-      if (!r.ok) throw new Error('index.json not found');
-      return r.json();
-    });
+    restaurantFiles = await fetch(indexUrl)
+      .then(r => r.ok ? r.json() : Promise.reject('index.json not found'));
   } catch (err) {
     console.error('Could not load data/index.json:', err);
     return;
   }
 
-  /* 2. Load every restaurant JSON in parallel ----------------------- */
-  let restaurantData = [];
-  try {
-    restaurantData = await Promise.all(
-      fileList.map(file =>
-        fetch(`${dataFolder}${file}`).then(r => {
-          if (!r.ok) throw new Error(`${file} not found`);
-          return r.json();
-        })
-      )
-    );
-  } catch (err) {
-    console.error('Error loading restaurant files:', err);
-    return;
-  }
+  // 2. Fetch all restaurant data
+  const restaurantData = await Promise.all(
+    restaurantFiles.map(fn =>
+      fetch(dataFolder + fn).then(r => r.ok ? r.json() : Promise.reject(fn))
+    )
+  );
 
-  /* 3. DOM refs & state ------------------------------------------------ */
+  // 3. Grab DOM elements
   const searchInput     = document.getElementById('restaurantSearch');
+  const nameInput       = document.getElementById('itemSearch');
   const ingredientInput = document.getElementById('ingredientSearch');
-  const expandBtn       = document.getElementById('expandAll');
-  const collapseBtn     = document.getElementById('collapseAll');
   const suggestions     = document.getElementById('suggestions');
   const menuContainer   = document.getElementById('menuContainer');
+  const expandBtn       = document.getElementById('expandAll');
+  const collapseBtn     = document.getElementById('collapseAll');
+  const themeToggle     = document.getElementById('themeToggle');
+  const root            = document.documentElement;
+
   let currentRestaurant = null;
-  let activeIndex       = -1;
 
-  /* 4. Helper to toggle all items */
-  function setAll(open) {
-    const contents = menuContainer.querySelectorAll('.ingredients-content');
-    contents.forEach(content => {
-      const idx = content.getAttribute('data-idx');
-      const btn = menuContainer.querySelector(`.toggle-btn[data-idx="${idx}"]`);
-      if (open) {
-        content.style.maxHeight = content.scrollHeight + 'px';
-        btn.textContent = 'Hide ingredients';
-      } else {
-        content.style.maxHeight = '0';
-        btn.textContent = 'Show ingredients';
-      }
-    });
-  }
-
-  expandBtn.addEventListener('click', () => setAll(true));
-  collapseBtn.addEventListener('click', () => setAll(false));
-
-  /* 5. Render helpers ------------------------------------------------ */
-  function showSuggestions(list) {
-    suggestions.innerHTML = list.length
-      ? list.map((r, i) => `<div class="suggestion-item" data-id="${r.id}" data-index="${i}">${r.name}</div>`).join('')
-      : '<div class="suggestion-item">No results found</div>';
-  }
-
+  // Utility: clear active suggestion
   function clearActive() {
-    activeIndex = -1;
-    suggestions.querySelectorAll('.suggestion-item').forEach(el => el.classList.remove('active'));
+    suggestions.querySelectorAll('.suggestion-item')
+      .forEach(el => el.classList.remove('active'));
   }
 
-  function setActive(idx) {
-    clearActive();
-    const items = suggestions.querySelectorAll('.suggestion-item');
-    if (items[idx]) {
-      items[idx].classList.add('active');
-      activeIndex = idx;
-      items[idx].scrollIntoView({ block: 'nearest' });
-    }
+  // Show list of matching restaurants
+  function showSuggestions(list) {
+    suggestions.innerHTML = list
+      .map(r => `<div class="suggestion-item" data-id="${r.id}">${r.name}</div>`)
+      .join('');
   }
 
-  function selectActive() {
-    const item = suggestions.querySelector('.suggestion-item.active');
-    if (item) item.click();
-  }
-
-  function renderMenu(restaurant, filter = '') {
-    currentRestaurant = restaurant;
-    const items = filter
-      ? restaurant.menu.filter(item => item.ingredients.some(ing => ing.toLowerCase().includes(filter)))
-      : restaurant.menu;
-
-    menuContainer.innerHTML = `
-      <div class="restaurant-card"><h3>${restaurant.name}</h3></div>
-      ${items.map((item, idx) => `
-        <div class="restaurant-card">
-          <div class="menu-item">
-            <h4>${item.name}</h4>
-            ${item.description ? `<p>${item.description}</p>` : ``}
-            <button class="toggle-btn" data-idx="${idx}">Show ingredients</button>
-            <div class="ingredients-content" data-idx="${idx}" style="max-height:0; overflow:hidden; transition:max-height 0.3s ease;">
-              <strong>Ingredients:</strong>
-              ${item.ingredients.length
-                ? `<ul>${item.ingredients.map(ing => `<li>${ing}</li>`).join('')}</ul>`
-                : `<p class="no-data">Ingredients to come!</p>`}
-            </div>
-          </div>
-        </div>
-      `).join('')}
-    `;
-
-    // attach toggle listeners
-    menuContainer.querySelectorAll('.toggle-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        const idx = btn.getAttribute('data-idx');
-        const content = menuContainer.querySelector(`.ingredients-content[data-idx="${idx}"]`);
-        const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
-        if (isOpen) {
-          content.style.maxHeight = '0';
-          btn.textContent = 'Show ingredients';
-        } else {
-          content.style.maxHeight = content.scrollHeight + 'px';
-          btn.textContent = 'Hide ingredients';
-        }
-      });
-    });
-  }
-
-  /* 6. Events -------------------------------------------------------- */
-  searchInput.addEventListener('input', e => {
-    const q = e.target.value.toLowerCase().trim();
-    if (!q) {
-      suggestions.innerHTML = '';
+  // Render the menu items according to current filters
+  function renderMenu() {
+    if (!currentRestaurant) {
       menuContainer.innerHTML = '';
-      currentRestaurant = null;
       return;
     }
-    const matches = restaurantData.filter(r => r.name.toLowerCase().includes(q));
-    showSuggestions(matches);
-    clearActive();
-  });
+    const nameQ = nameInput.value.trim().toLowerCase();
+    const ingQ  = ingredientInput.value.trim().toLowerCase();
 
-  searchInput.addEventListener('keydown', e => {
-    const items = suggestions.querySelectorAll('.suggestion-item');
-    if (!items.length) return;
-    switch (e.key) {
-      case 'ArrowDown': e.preventDefault(); setActive((activeIndex + 1) % items.length); break;
-      case 'ArrowUp': e.preventDefault(); setActive((activeIndex - 1 + items.length) % items.length); break;
-      case 'Enter': e.preventDefault(); selectActive(); break;
-    }
-  });
+    // Build HTML
+    menuContainer.innerHTML = currentRestaurant.menu
+      .map((item, idx) => {
+        const itemName = item.name.toLowerCase();
+        const ingText  = item.ingredients.join(' ').toLowerCase();
+        // filter by name & ingredient queries
+        if (
+          (nameQ === '' || itemName.includes(nameQ)) &&
+          (ingQ  === '' || ingText.includes(ingQ))
+        ) {
+          return `
+            <div class="menu-item">
+              <div class="item-header">
+                <h3 class="item-name">${item.name}</h3>
+                <button class="toggle-btn" data-idx="${idx}">Ingredients</button>
+              </div>
+              <div class="ingredients-content" data-idx="${idx}" style="display:none;">
+                <ul>
+                  ${item.ingredients.map(ing => `<li>${ing}</li>`).join('')}
+                </ul>
+              </div>
+            </div>
+          `;
+        } else {
+          return '';
+        }
+      })
+      .join('');
+  }
 
+  // 4. Event: select a restaurant
   suggestions.addEventListener('click', e => {
-    if (!e.target.matches('.suggestion-item')) return;
-    const rest = restaurantData.find(r => r.id === e.target.dataset.id);
-    searchInput.value = rest.name;
-    suggestions.innerHTML = '';
+    if (!e.target.classList.contains('suggestion-item')) return;
+    clearActive();
+    e.target.classList.add('active');
+    currentRestaurant = restaurantData.find(r => r.id === e.target.dataset.id);
+    searchInput.value     = currentRestaurant.name;
+    nameInput.value       = '';
     ingredientInput.value = '';
-    renderMenu(rest);
+    suggestions.innerHTML = '';
+    renderMenu();
   });
 
-  ingredientInput.addEventListener('input', e => {
-    if (!currentRestaurant) return;
-    const filter = e.target.value.toLowerCase().trim();
-    renderMenu(currentRestaurant, filter);
+  // 5. Search input → show matching restaurants
+  searchInput.addEventListener('input', () => {
+    const q = searchInput.value.trim().toLowerCase();
+    if (q === '') {
+      suggestions.innerHTML = '';
+      return;
+    }
+    const matches = restaurantData.filter(r =>
+      r.name.toLowerCase().includes(q)
+    );
+    showSuggestions(matches);
   });
 
-  searchInput.addEventListener('focus', () => { showSuggestions(restaurantData); clearActive(); });
+  // 6. Re‑render when item‑name or ingredient inputs change
+  nameInput.addEventListener('input', renderMenu);
+  ingredientInput.addEventListener('input', renderMenu);
+
+  // 7. Expand/Collapse all
+  expandBtn.addEventListener('click', () => {
+    menuContainer.querySelectorAll('.ingredients-content')
+      .forEach(c => c.style.display = 'block');
+  });
+  collapseBtn.addEventListener('click', () => {
+    menuContainer.querySelectorAll('.ingredients-content')
+      .forEach(c => c.style.display = 'none');
+  });
+
+  // 8. Toggle individual ingredient lists
+  menuContainer.addEventListener('click', e => {
+    if (!e.target.classList.contains('toggle-btn')) return;
+    const idx = e.target.dataset.idx;
+    const content = menuContainer.querySelector(
+      `.ingredients-content[data-idx="${idx}"]`
+    );
+    content.style.display = (content.style.display === 'none' || !content.style.display)
+      ? 'block'
+      : 'none';
+  });
+
+  // 9. Theme toggle
+  const savedTheme = localStorage.getItem('theme') || 'light';
+  root.setAttribute('data-theme', savedTheme);
+  themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+  themeToggle.addEventListener('click', () => {
+    const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+    root.setAttribute('data-theme', next);
+    localStorage.setItem('theme', next);
+    themeToggle.textContent = next === 'dark' ? '☀️' : '🌙';
+  });
 })();
