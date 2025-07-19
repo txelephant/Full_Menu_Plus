@@ -121,6 +121,10 @@ header.hero {
   background: var(--contrast-bg);
   filter: brightness(0.9);
 }
+.suggestion-item.active {
+  background: var(--primary);
+  color: #fff;
+}
 
 /* ---------- Restaurant cards (grid layout) ---------- */
 .restaurant-list {
