@@ -1,0 +1,67 @@
+{
+  "id": "jolie-petite",
+  "name": "Jolie Petite",
+  "menu": [
+    {
+      "name": "Croque Madame",
+      "description": "Toasted brioche with ham, Gruyère, béchamel, and a sunny‑side egg on top",
+      "ingredients": [
+        "Brioche bread",
+        "Ham",
+        "Gruyère cheese",
+        "Béchamel sauce",
+        "Butter",
+        "Egg",
+        "Salt",
+        "Pepper"
+      ]
+    },
+    {
+      "name": "Brioche French Toast",
+      "description": "Thick‑cut brioche soaked in vanilla custard, served with berries and maple syrup",
+      "ingredients": [
+        "Brioche bread",
+        "Eggs",
+        "Milk",
+        "Vanilla extract",
+        "Cinnamon",
+        "Butter",
+        "Strawberries",
+        "Blueberries",
+        "Maple syrup",
+        "Powdered sugar"
+      ]
+    },
+    {
+      "name": "Quiche Lorraine",
+      "description": "Classic quiche with bacon lardons, Gruyère, and caramelized onions",
+      "ingredients": [
+        "Pie crust",
+        "Eggs",
+        "Heavy cream",
+        "Gruyère cheese",
+        "Bacon",
+        "Onion",
+        "Nutmeg",
+        "Salt",
+        "Pepper"
+      ]
+    },
+    {
+      "name": "Ratatouille Omelette",
+      "description": "Fluffy omelette stuffed with Provençal veggies and fresh herbs",
+      "ingredients": [
+        "Eggs",
+        "Zucchini",
+        "Eggplant",
+        "Tomato",
+        "Bell pepper",
+        "Garlic",
+        "Olive oil",
+        "Herbes de Provence",
+        "Salt",
+        "Pepper"
+      ]
+    }
+  ]
+}
