@@ -1,89 +1,81 @@
 // js/app.js
-// -------------------------------------------------------------------
-// Loads restaurant JSON files, powers the search box & menu rendering
-// -------------------------------------------------------------------
+(async () => {
+  const dataFolder = 'data/';
 
-// Folder where your JSON files live (relative to index.html)
-const dataFolder = 'data/';
+  const fileList = [
+    'la-terraza.json'
+  ];
 
-// List ONLY the files that currently exist in /data/
-// Add more filenames here whenever you create new JSON files.
-const fileList = [
-  'la-terraza.json'
-];
+  // 1. Load JSON files
+  let restaurantData = [];
+  try {
+    restaurantData = await Promise.all(
+      fileList.map(file =>
+        fetch(`${dataFolder}${file}`)
+          .then(r => {
+            if (!r.ok) throw new Error(`${file} not found`);
+            return r.json();
+          })
+      )
+    );
+  } catch (err) {
+    console.error('Data load error:', err);
+    return;               // stop setup so we don't hit undefined
+  }
 
-// --------------------------------------------------
-// 1. Load every JSON file in parallel
-// --------------------------------------------------
-const restaurantData = await Promise.all(
-  fileList.map(file =>
-    fetch(`${dataFolder}${file}`)
-      .then(r => {
-        if (!r.ok) throw new Error(`${file} not found`);
-        return r.json();
-      })
-  )
-);
+  // 2. DOM references
+  const searchInput   = document.getElementById('restaurantSearch');
+  const suggestions   = document.getElementById('suggestions');
+  const menuContainer = document.getElementById('menuContainer');
 
-// --------------------------------------------------
-// 2. DOM references
-// --------------------------------------------------
-const searchInput   = document.getElementById('restaurantSearch');
-const suggestions   = document.getElementById('suggestions');
-const menuContainer = document.getElementById('menuContainer');
-
-// --------------------------------------------------
-// 3. Render helpers
-// --------------------------------------------------
-function showSuggestions(list) {
-  suggestions.innerHTML = list.length
-    ? list.map(r => `<div class="suggestion-item" data-id="${r.id}">${r.name}</div>`).join('')
-    : '<div class="suggestion-item">No results found</div>';
-}
-
-function renderMenu(restaurant) {
-  menuContainer.innerHTML = `
-    <div class="restaurant-card">
-      <img src="${restaurant.image}" alt="${restaurant.name}">
-      <h3>${restaurant.name}</h3>
-    </div>
-    ${restaurant.menu.map(item => `
+  // 3. Render helpers
+  function showSuggestions(list) {
+    suggestions.innerHTML = list.length
+      ? list.map(r => `<div class="suggestion-item" data-id="${r.id}">${r.name}</div>`).join('')
+      : '<div class="suggestion-item">No results found</div>';
+  }
+  function renderMenu(restaurant) {
+    menuContainer.innerHTML = `
       <div class="restaurant-card">
-        <div class="menu-item">
-          <h4>${item.name} - $${item.price.toFixed(2)}</h4>
-          <p>${item.description}</p>
-          <p class="ingredients"><strong>Ingredients:</strong> ${item.ingredients.join(', ')}</p>
-        </div>
+        <img src="${restaurant.image}" alt="${restaurant.name}">
+        <h3>${restaurant.name}</h3>
       </div>
-    `).join('')}
-  `;
-}
-
-// --------------------------------------------------
-// 4. Event listeners
-// --------------------------------------------------
-searchInput.addEventListener('input', e => {
-  const q = e.target.value.toLowerCase().trim();
-  if (!q) { suggestions.innerHTML = ''; menuContainer.innerHTML = ''; return; }
-  const matches = restaurantData.filter(r => r.name.toLowerCase().includes(q));
-  showSuggestions(matches);
-});
-
-suggestions.addEventListener('click', e => {
-  if (e.target.matches('.suggestion-item')) {
-    const rest = restaurantData.find(r => r.id === e.target.dataset.id);
-    searchInput.value = rest.name;
-    suggestions.innerHTML = '';
-    renderMenu(rest);
+      ${restaurant.menu.map(item => `
+        <div class="restaurant-card">
+          <div class="menu-item">
+            <h4>${item.name} - $${item.price.toFixed(2)}</h4>
+            <p>${item.description}</p>
+            <p class="ingredients"><strong>Ingredients:</strong> ${item.ingredients.join(', ')}</p>
+          </div>
+        </div>
+      `).join('')}
+    `;
   }
-});
 
-searchInput.addEventListener('keydown', e => {
-  if (e.key === 'Enter') {
-    const q = searchInput.value.toLowerCase().trim();
-    const match = restaurantData.find(r => r.name.toLowerCase().includes(q));
-    if (match) { suggestions.innerHTML = ''; renderMenu(match); }
-  }
-});
+  // 4. Events
+  searchInput.addEventListener('input', e => {
+    const q = e.target.value.toLowerCase().trim();
+    if (!q) { suggestions.innerHTML = ''; menuContainer.innerHTML = ''; return; }
+    const matches = restaurantData.filter(r => r.name.toLowerCase().includes(q));
+    showSuggestions(matches);
+  });
 
-searchInput.addEventListener('focus', () => showSuggestions(restaurantData));
+  suggestions.addEventListener('click', e => {
+    if (e.target.matches('.suggestion-item')) {
+      const rest = restaurantData.find(r => r.id === e.target.dataset.id);
+      searchInput.value = rest.name;
+      suggestions.innerHTML = '';
+      renderMenu(rest);
+    }
+  });
+
+  searchInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') {
+      const q = searchInput.value.toLowerCase().trim();
+      const match = restaurantData.find(r => r.name.toLowerCase().includes(q));
+      if (match) { suggestions.innerHTML = ''; renderMenu(match); }
+    }
+  });
+
+  searchInput.addEventListener('focus', () => showSuggestions(restaurantData));
+})();
