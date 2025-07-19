@@ -1,5 +1,5 @@
 // js/app.js
-const dataFolder = '/data/';           // adjust if you host in a sub‑folder
+const dataFolder = 'data/';           // adjust if you host in a sub‑folder
 const fileList  = [
   'liberty-kitchen.json',
   'ridleys-bbq.json',
