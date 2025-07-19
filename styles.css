@@ -1,3 +1,29 @@
+/* ---------- Theme Variables ---------- */
+:root {
+  --bg: #f4f4f4;
+  --text: #333;
+  --card-bg: #fff;
+  --card-border: #e0e0e0;
+  --overlay-bg: rgba(0, 0, 0, 0.45);
+  --primary: #005f73;
+  --highlight: #ffdd57;
+  --shadow: rgba(0, 0, 0, 0.1);
+  --contrast-bg: #fff;
+  --contrast-text: #666;
+}
+[data-theme="dark"] {
+  --bg: #121212;
+  --text: #ddd;
+  --card-bg: #1e1e1e;
+  --card-border: #333;
+  --overlay-bg: rgba(0, 0, 0, 0.6);
+  --primary: #4ad9e3;
+  --highlight: #ffc857;
+  --shadow: rgba(0, 0, 0, 0.5);
+  --contrast-bg: #2a2a2a;
+  --contrast-text: #888;
+}
+
 /* ---------- Base ---------- */
 * {
   box-sizing: border-box;
@@ -6,8 +32,9 @@ body {
   font-family: 'Montserrat', sans-serif;
   margin: 0;
   padding: 0;
-  background: #f4f4f4;
-  color: #333;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.3s, color 0.3s;
 }
 main {
   padding: 1rem;
@@ -30,14 +57,15 @@ header.hero {
   align-items: center;
   justify-content: center;
   text-align: center;
-  background: rgba(0, 0, 0, 0.45);
+  background: var(--overlay-bg);
 }
 .overlay h1 {
   font-size: 3rem;
   margin: 0;
-  color: #ffdd57;
+  color: var(--highlight);
   text-transform: uppercase;
   text-shadow: 2px 2px #00363a;
+  transition: color 0.3s;
 }
 
 /* ---------- Tagline ---------- */
@@ -45,8 +73,9 @@ header.hero {
   margin: 1.5rem auto 1rem;
   text-align: center;
   font-size: 1.2rem;
-  color: #555;
+  color: var(--contrast-text);
   max-width: 640px;
+  transition: color 0.3s;
 }
 
 /* ---------- Search ---------- */
@@ -63,28 +92,34 @@ header.hero {
   width: 100%;
   padding: 0.75rem;
   font-size: 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid var(--card-border);
   border-radius: 4px;
+  background: var(--contrast-bg);
+  color: var(--text);
+  transition: background 0.3s, color 0.3s, border-color 0.3s;
 }
 .suggestions {
   position: absolute;
   top: calc(100% + 0.5rem);
   left: 0;
   right: 0;
-  background: #fff;
-  border: 1px solid #ccc;
+  background: var(--contrast-bg);
+  border: 1px solid var(--card-border);
   border-top: none;
   max-height: 200px;
   overflow-y: auto;
   border-radius: 0 0 4px 4px;
   z-index: 100;
+  transition: background 0.3s, color 0.3s;
 }
 .suggestion-item {
   padding: 0.5rem;
   cursor: pointer;
+  color: var(--text);
 }
 .suggestion-item:hover {
-  background: #eee;
+  background: var(--contrast-bg);
+  filter: brightness(0.9);
 }
 
 /* ---------- Restaurant cards (grid layout) ---------- */
@@ -102,16 +137,16 @@ header.hero {
 
 /* ---------- Card styling & hover effects ---------- */
 .restaurant-card {
-  background: #fff;
-  border: 1px solid #e0e0e0;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
   border-radius: 8px;
   overflow: hidden;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.3s;
 }
 .restaurant-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  border-color: #ccc;
+  box-shadow: 0 8px 16px var(--shadow);
+  border-color: var(--primary);
 }
 .restaurant-card img {
   width: 100%;
@@ -127,7 +162,8 @@ header.hero {
 .menu-item h4 {
   margin: 0 0 0.25rem;
   font-weight: 600;
-  color: #005f73;
+  color: var(--primary);
+  transition: color 0.3s;
 }
 .menu-item p {
   margin: 0.25rem 0;
@@ -136,8 +172,9 @@ header.hero {
 /* ---------- Ingredients list ---------- */
 .menu-item .ingredients {
   font-size: 0.9rem;
-  color: #555;
+  color: var(--contrast-text);
   margin-top: 0.5rem;
+  transition: color 0.3s;
 }
 .menu-item .ingredients ul {
   list-style: disc inside;
@@ -149,7 +186,7 @@ header.hero {
 }
 .menu-item .ingredients .no-data {
   font-style: italic;
-  color: #666;
+  color: var(--contrast-text);
   margin-top: 0.5em;
 }
 
@@ -165,6 +202,7 @@ header.hero {
   margin: 0 0 1rem;
   font-size: 1.75rem;
   font-weight: 600;
-  color: #005f73;
+  color: var(--primary);
   text-align: left;
+  transition: color 0.3s;
 }
