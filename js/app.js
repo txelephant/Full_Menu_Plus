@@ -1,12 +1,20 @@
-// js/app.js  (no photos, no prices)
+// js/app.js  — auto‑discovers restaurant files listed in data/index.json
 (async () => {
   const dataFolder = 'data/';
 
-  const fileList = [
-    'la-terraza.json'
-  ];
+  /* 1. Fetch the master index --------------------------------------- */
+  let fileList = [];
+  try {
+    fileList = await fetch(`${dataFolder}index.json`).then(r => {
+      if (!r.ok) throw new Error('index.json not found');
+      return r.json();
+    });
+  } catch (err) {
+    console.error('Could not load data/index.json:', err);
+    return;
+  }
 
-  // 1. Load JSON files
+  /* 2. Load every restaurant JSON in parallel ----------------------- */
   let restaurantData = [];
   try {
     restaurantData = await Promise.all(
@@ -19,16 +27,16 @@
       )
     );
   } catch (err) {
-    console.error('Data load error:', err);
+    console.error('Error loading restaurant files:', err);
     return;
   }
 
-  // 2. DOM refs
+  /* 3. DOM refs ------------------------------------------------------ */
   const searchInput   = document.getElementById('restaurantSearch');
   const suggestions   = document.getElementById('suggestions');
   const menuContainer = document.getElementById('menuContainer');
 
-  // 3. Render helpers
+  /* 4. Render helpers ------------------------------------------------ */
   function showSuggestions(list) {
     suggestions.innerHTML = list.length
       ? list.map(r => `<div class="suggestion-item" data-id="${r.id}">${r.name}</div>`).join('')
@@ -52,7 +60,7 @@
     `;
   }
 
-  // 4. Events
+  /* 5. Events -------------------------------------------------------- */
   searchInput.addEventListener('input', e => {
     const q = e.target.value.toLowerCase().trim();
     if (!q) { suggestions.innerHTML = ''; menuContainer.innerHTML = ''; return; }
