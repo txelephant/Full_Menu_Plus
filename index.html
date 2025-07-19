@@ -17,29 +17,34 @@
     }
     main{padding:1rem;}
 
-    /* ---------- Hero / Banner ---------- */
+    /* ---------- Hero with full‑width image ---------- */
     header.hero{
-      height:260px;                              /* adjust height if needed */
-      background:url('images/banner.jpg') center/cover no-repeat;
       position:relative;
+      overflow:hidden;                  /* keep everything inside */
+    }
+    .hero-img{
+      width:100%;                       /* show whole image */
+      height:auto;
+      display:block;                    /* remove bottom gap */
+    }
+    .overlay{
+      position:absolute;                /* float on top of img */
+      inset:0;                          /* stretch to full header */
       display:flex;
+      flex-direction:column;
       align-items:center;
       justify-content:center;
       text-align:center;
+      background:rgba(0,0,0,0.45);      /* translucent dark layer */
     }
-    .hero .overlay{
-      background:rgba(0,0,0,0.45);               /* darken so text pops */
-      padding:1rem 2rem;
-      border-radius:8px;
-    }
-    .hero h1{
+    .overlay h1{
       font-size:3rem;
       margin:0;
       color:#ffdd57;
       text-transform:uppercase;
       text-shadow:2px 2px #00363a;
     }
-    .hero p{
+    .overlay p{
       margin:0;
       color:#fff;
       font-size:1.1rem;
@@ -96,7 +101,7 @@
     }
     .restaurant-card img{
       width:100%;
-      aspect-ratio:4/3;              /* keeps proportion, no squish */
+      aspect-ratio:4/3;          /* prevent squish */
       object-fit:cover;
       border-radius:4px;
       margin-bottom:0.75rem;
@@ -113,14 +118,18 @@
     .ingredients{font-size:0.9rem;color:#555;}
   </style>
 </head>
+
 <body>
+  <!-- Hero banner -->
   <header class="hero">
+    <img src="images/banner.jpg" alt="Ingredient Insider banner" class="hero-img">
     <div class="overlay">
       <h1>Ingredient Insider</h1>
       <p>Full ingredient lists for Brownsville eateries</p>
     </div>
   </header>
 
+  <!-- Main content -->
   <main>
     <div class="search-container">
       <input type="text" id="restaurantSearch" placeholder="Search restaurants..." autocomplete="off" />
@@ -129,6 +138,7 @@
     <div class="restaurant-list" id="menuContainer"></div>
   </main>
 
+  <!-- JavaScript -->
   <script>
     /* ---------- Data ---------- */
     const data=[
@@ -191,7 +201,7 @@
       }
     ];
 
-    /* ---------- DOM ---------- */
+    /* ---------- DOM refs ---------- */
     const searchInput=document.getElementById('restaurantSearch');
     const suggestions=document.getElementById('suggestions');
     const menuContainer=document.getElementById('menuContainer');
@@ -222,7 +232,7 @@
       const headerCard=document.createElement('div');
       headerCard.className='restaurant-card';
       headerCard.innerHTML=`
-        <img src="${restaurant.image}" alt="${restaurant.name}" />
+        <img src="${restaurant.image}" alt="${restaurant.name}">
         <h3>${restaurant.name}</h3>
       `;
       menuContainer.appendChild(headerCard);
@@ -249,7 +259,7 @@
       showSuggestions(filtered);
     });
 
-    /*  Press Enter to pick the first match (no extra click) */
+    /*  Press Enter to pick the first match */
     searchInput.addEventListener('keydown',e=>{
       if(e.key==='Enter'){
         const query=searchInput.value.toLowerCase().trim();
