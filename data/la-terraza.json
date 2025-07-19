@@ -1,1 +1,25 @@
-
+{
+  "id": "liberty-kitchen",
+  "name": "Liberty Kitchen & Oysterette",
+  "image": "images/liberty-kitchen.jpg",
+  "menu": [
+    {
+      "name": "Oyster Po' Boy",
+      "description": "Fried oysters with fresh fixings",
+      "ingredients": [
+        "Oysters", "Flour", "Egg", "Breadcrumbs", "Salt", "Pepper",
+        "Cooking oil", "Lettuce", "Tomato", "Pickles", "Tartar sauce", "Baguette roll"
+      ],
+      "price": 15.99
+    },
+    {
+      "name": "Chargrilled Oysters",
+      "description": "Oysters baked with garlic butter and cheese",
+      "ingredients": [
+        "Oysters", "Garlic", "Butter", "Parmesan cheese", "Breadcrumbs",
+        "Parsley", "Lemon"
+      ],
+      "price": 12.49
+    }
+  ]
+}
