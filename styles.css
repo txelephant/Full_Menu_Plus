@@ -152,3 +152,19 @@ header.hero {
   color: #666;
   margin-top: 0.5em;
 }
+
+/* ---------- Restaurant title as full-width header ---------- */
+.restaurant-card:first-child {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0 1rem;
+  grid-column: 1 / -1;
+}
+.restaurant-card:first-child h3 {
+  margin: 0 0 1rem;
+  font-size: 1.75rem;
+  font-weight: 600;
+  color: #005f73;
+  text-align: left;
+}
