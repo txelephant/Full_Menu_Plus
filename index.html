@@ -13,13 +13,16 @@
     <img src="images/banner.jpg" alt="Ingredient Insider Banner" class="hero-img">
     <div class="overlay">
       <h1>Ingredient Insider</h1>
-      <!-- Dark mode toggle -->
-      <button id="themeToggle" aria-label="Toggle dark mode" class="theme-toggle">🌙</button>
     </div>
   </header>
 
-  <!-- Tagline and search -->
-  <p class="tagline">Full ingredient lists for Brownsville eateries</p>
+  <!-- Tagline, theme toggle, and search -->
+  <div class="intro-controls" style="display:flex; align-items:center; justify-content:space-between; max-width:640px; margin:1.5rem auto;">
+    <p class="tagline" style="margin:0; font-size:1.2rem; color:var(--contrast-text);">Full ingredient lists for Brownsville eateries</p>
+    <!-- Dark mode toggle moved here -->
+    <button id="themeToggle" aria-label="Toggle dark mode" class="theme-toggle" style="font-size:1.5rem; background:none; border:none; cursor:pointer;">🌙</button>
+  </div>
+
   <main>
     <div class="search-container">
       <input id="restaurantSearch" placeholder="Search restaurants…" autocomplete="off" />
