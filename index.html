@@ -20,22 +20,21 @@
     /* ---------- Hero with full‑width image ---------- */
     header.hero{
       position:relative;
-      overflow:hidden;                  /* keep everything inside */
+      overflow:hidden;
     }
     .hero-img{
-      width:100%;                       /* show whole image */
+      width:100%;
       height:auto;
-      display:block;                    /* remove bottom gap */
+      display:block;
     }
     .overlay{
-      position:absolute;                /* float on top of img */
-      inset:0;                          /* stretch to full header */
+      position:absolute;
+      inset:0;
       display:flex;
-      flex-direction:column;
       align-items:center;
       justify-content:center;
       text-align:center;
-      background:rgba(0,0,0,0.45);      /* translucent dark layer */
+      background:rgba(0,0,0,0.45);
     }
     .overlay h1{
       font-size:3rem;
@@ -44,10 +43,14 @@
       text-transform:uppercase;
       text-shadow:2px 2px #00363a;
     }
-    .overlay p{
-      margin:0;
-      color:#fff;
-      font-size:1.1rem;
+
+    /* ---------- Tagline (moved below hero) ---------- */
+    .tagline{
+      margin:1.5rem auto 1rem;
+      text-align:center;
+      font-size:1.2rem;
+      color:#555;
+      max-width:640px;
     }
 
     /* ---------- Search ---------- */
@@ -101,7 +104,7 @@
     }
     .restaurant-card img{
       width:100%;
-      aspect-ratio:4/3;          /* prevent squish */
+      aspect-ratio:4/3;
       object-fit:cover;
       border-radius:4px;
       margin-bottom:0.75rem;
@@ -125,9 +128,11 @@
     <img src="images/banner.jpg" alt="Ingredient Insider banner" class="hero-img">
     <div class="overlay">
       <h1>Ingredient Insider</h1>
-      <p>Full ingredient lists for Brownsville eateries</p>
     </div>
   </header>
+
+  <!-- Tagline below hero -->
+  <p class="tagline">Full ingredient lists for Brownsville eateries</p>
 
   <!-- Main content -->
   <main>
