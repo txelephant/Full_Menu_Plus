@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,26 +10,20 @@
 <body>
   <!-- Hero -->
   <header class="hero">
-    <img src="images/banner.jpg" alt="" class="hero-img">
-    <div class="overlay"><h1>Ingredient Insider</h1></div>
+    <img src="images/banner.jpg" alt="Ingredient Insider Banner" class="hero-img">
+    <div class="overlay">
+      <h1>Ingredient Insider</h1>
+      <!-- Dark mode toggle -->
+      <button id="themeToggle" aria-label="Toggle dark mode" class="theme-toggle">🌙</button>
+    </div>
   </header>
 
   <!-- Tagline and search -->
   <p class="tagline">Full ingredient lists for Brownsville eateries</p>
   <main>
     <div class="search-container">
-      <!-- Restaurant name search -->
-      <input
-        id="restaurantSearch"
-        placeholder="Search restaurants…"
-        autocomplete="off"
-      />
-      <!-- Ingredient filter search -->
-      <input
-        id="ingredientSearch"
-        placeholder="Filter by ingredient…"
-        autocomplete="off"
-      />
+      <input id="restaurantSearch" placeholder="Search restaurants…" autocomplete="off" />
+      <input id="ingredientSearch" placeholder="Filter by ingredient…" autocomplete="off" />
       <div id="suggestions" class="suggestions"></div>
     </div>
     <div id="menuContainer" class="restaurant-list"></div>
@@ -37,5 +31,21 @@
 
   <!-- Main JS bundle -->
   <script src="js/app.js" type="module"></script>
+  <script>
+    // Dark mode toggle logic
+    const themeToggle = document.getElementById('themeToggle');
+    const root = document.documentElement;
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    root.setAttribute('data-theme', savedTheme);
+    themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+    themeToggle.addEventListener('click', () => {
+      const current = root.getAttribute('data-theme');
+      const next = current === 'light' ? 'dark' : 'light';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      themeToggle.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+  </script>
 </body>
 </html>
