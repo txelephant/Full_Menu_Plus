@@ -1,25 +1,49 @@
 {
-  "id": "liberty-kitchen",
-  "name": "Liberty Kitchen & Oysterette",
-  "image": "images/liberty-kitchen.jpg",
+  "id": "la-terraza",
+  "name": "La Terraza Mexican Restaurant",
+  "image": "images/la-terraza.jpg",
   "menu": [
     {
-      "name": "Oyster Po' Boy",
-      "description": "Fried oysters with fresh fixings",
+      "name": "Carne Asada Tacos",
+      "description": "Grilled steak tacos with fresh toppings",
       "ingredients": [
-        "Oysters", "Flour", "Egg", "Breadcrumbs", "Salt", "Pepper",
-        "Cooking oil", "Lettuce", "Tomato", "Pickles", "Tartar sauce", "Baguette roll"
+        "Corn tortillas",
+        "Flank steak",
+        "Onion",
+        "Cilantro",
+        "Lime",
+        "Salt"
       ],
-      "price": 15.99
+      "price": 8.99
     },
     {
-      "name": "Chargrilled Oysters",
-      "description": "Oysters baked with garlic butter and cheese",
+      "name": "Chicken Fajitas",
+      "description": "Sizzling chicken with peppers & onions",
       "ingredients": [
-        "Oysters", "Garlic", "Butter", "Parmesan cheese", "Breadcrumbs",
-        "Parsley", "Lemon"
+        "Flour tortillas",
+        "Chicken breast",
+        "Bell peppers",
+        "Onion",
+        "Fajita seasoning",
+        "Butter",
+        "Sour cream",
+        "Guacamole",
+        "Cheese"
       ],
-      "price": 12.49
+      "price": 11.99
+    },
+    {
+      "name": "Queso Fundido",
+      "description": "Melted cheese dip with chorizo",
+      "ingredients": [
+        "Monterey Jack cheese",
+        "Oaxaca cheese",
+        "Chorizo",
+        "Poblano pepper",
+        "Onion",
+        "Corn chips"
+      ],
+      "price": 6.50
     }
   ]
 }
