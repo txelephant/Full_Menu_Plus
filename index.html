@@ -3,101 +3,192 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Restaurant Menus</title>
+  <title>Ingredient Insider</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
   <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; background: #f4f4f4; }
-    header { background: #333; color: white; padding: 1rem; text-align: center; }
-    .controls { padding: 1rem; display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center; }
-    .controls input,
-    .controls select { padding: 0.5rem; font-size: 1rem; }
-    .restaurant-list { display: flex; flex-wrap: wrap; padding: 1rem; }
-    .restaurant-card { background: white; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); margin: 1rem; padding: 1rem; flex: 1 1 300px; }
-    .menu-item { margin-bottom: 1rem; }
-    .menu-item h4 { margin: 0 0 0.25rem; }
-    .ingredients { font-size: 0.9rem; color: #555; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      margin: 0; padding: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background: #005f73;
+      color: #fff;
+      padding: 1rem 0;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    header h1 { margin: 0; font-weight: 600; }
+    main { padding: 1rem; }
+    .search-container {
+      max-width: 400px;
+      margin: 0 auto 2rem;
+      position: relative;
+    }
+    #restaurantSearch {
+      width: 100%;
+      padding: 0.75rem;
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .suggestions {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-top: none;
+      max-height: 200px;
+      overflow-y: auto;
+      border-radius: 0 0 4px 4px;
+      z-index: 100;
+    }
+    .suggestion-item {
+      padding: 0.5rem;
+      cursor: pointer;
+    }
+    .suggestion-item:hover {
+      background: #eee;
+    }
+    .restaurant-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1rem;
+    }
+    .restaurant-card {
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      padding: 1rem;
+      width: 300px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .restaurant-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    }
+    .menu-item { margin-bottom: 1.25rem; }
+    .menu-item h4 {
+      margin: 0 0 0.25rem;
+      font-weight: 600;
+      color: #005f73;
+    }
+    .menu-item p { margin: 0.25rem 0; }
+    .ingredients {
+      font-size: 0.9rem;
+      color: #555;
+    }
   </style>
 </head>
 <body>
   <header>
-    <h1>Restaurant Menus</h1>
+    <h1>Ingredient Insider</h1>
+    <p>Full ingredient lists for Brownsville eateries</p>
   </header>
 
   <main>
-    <div class="controls">
-      <input type="text" id="restaurantSearch" placeholder="Search restaurants..." />
-      <select id="restaurantSelect">
-        <option value="">-- Select a Restaurant --</option>
-      </select>
+    <div class="search-container">
+      <input type="text" id="restaurantSearch" placeholder="Search restaurants..." autocomplete="off" />
+      <div class="suggestions" id="suggestions"></div>
     </div>
     <div class="restaurant-list" id="menuContainer"></div>
   </main>
 
   <script>
-    // Sample data structure: restaurants with full ingredients list
     const data = [
       {
-        id: 'deli-delights',
-        name: 'Deli Delights',
+        id: 'liberty-kitchen',
+        name: 'Liberty Kitchen & Oysterette',
         menu: [
           {
-            name: 'Turkey Club Sandwich',
-            description: 'Classic turkey club with bacon and veggies',
-            ingredients: ['Turkey breast', 'Bacon', 'Lettuce', 'Tomato', 'Mayonnaise', 'Cheddar cheese'],
-            price: 10.99
+            name: "Oyster Po' Boy",
+            description: 'Fried oysters with fresh fixings',
+            ingredients: [
+              'Oysters', 'Flour', 'Egg', 'Breadcrumbs', 'Salt', 'Pepper',
+              'Cooking oil', 'Lettuce', 'Tomato', 'Pickles', 'Tartar sauce', 'Baguette roll'
+            ],
+            price: 15.99
           },
           {
-            name: 'Veggie Wrap',
-            description: 'Fresh veggies wrapped in whole wheat tortilla',
-            ingredients: ['Spinach tortilla', 'Avocado', 'Cucumber', 'Bell peppers', 'Hummus'],
-            price: 8.49
+            name: 'Chargrilled Oysters',
+            description: 'Oysters baked with garlic butter and cheese',
+            ingredients: ['Oysters', 'Garlic', 'Butter', 'Parmesan cheese', 'Breadcrumbs', 'Parsley', 'Lemon'],
+            price: 12.49
           }
         ]
       },
       {
-        id: 'pasta-palace',
-        name: 'Pasta Palace',
+        id: 'ridleys-bbq',
+        name: "Ridley's Bar-B-Q",
         menu: [
           {
-            name: 'Spaghetti Bolognese',
-            description: 'Hearty meat sauce over spaghetti',
-            ingredients: ['Spaghetti', 'Ground beef', 'Tomato sauce', 'Onion', 'Garlic', 'Parmesan cheese'],
-            price: 12.99
+            name: 'Brisket Sandwich',
+            description: 'Smoked brisket piled high',
+            ingredients: ['Smoked brisket', 'BBQ sauce', 'Texas toast', 'Pickles', 'Onions'],
+            price: 9.99
           },
           {
-            name: 'Fettuccine Alfredo',
-            description: 'Creamy Alfredo sauce with fettuccine',
-            ingredients: ['Fettuccine', 'Butter', 'Heavy cream', 'Parmesan cheese', 'Nutmeg'],
-            price: 11.49
+            name: 'BBQ Beans',
+            description: 'Sweet and savory baked beans',
+            ingredients: ['Pinto beans', 'Bacon', 'Onion', 'Brown sugar', 'Mustard', 'BBQ sauce', 'Salt', 'Pepper'],
+            price: 4.49
+          }
+        ]
+      },
+      {
+        id: 'la-terraza',
+        name: 'La Terraza Mexican Restaurant',
+        menu: [
+          {
+            name: 'Carne Asada Tacos',
+            description: 'Grilled steak tacos with fresh toppings',
+            ingredients: ['Corn tortillas', 'Flank steak', 'Onion', 'Cilantro', 'Lime', 'Salt'],
+            price: 8.99
+          },
+          {
+            name: 'Chicken Fajitas',
+            description: 'Sizzling chicken with peppers & onions',
+            ingredients: ['Flour tortillas', 'Chicken breast', 'Bell peppers', 'Onion', 'Fajita seasoning', 'Butter', 'Sour cream', 'Guacamole', 'Cheese'],
+            price: 11.99
           }
         ]
       }
     ];
 
     const searchInput = document.getElementById('restaurantSearch');
-    const select = document.getElementById('restaurantSelect');
+    const suggestions = document.getElementById('suggestions');
     const menuContainer = document.getElementById('menuContainer');
 
-    // Populate dropdown based on provided list
-    function populateDropdown(restaurants) {
-      select.innerHTML = '<option value="">-- Select a Restaurant --</option>';
-      restaurants.forEach(r => {
-        const opt = document.createElement('option');
-        opt.value = r.id;
-        opt.textContent = r.name;
-        select.appendChild(opt);
+    function showSuggestions(list) {
+      suggestions.innerHTML = '';
+      list.forEach(r => {
+        const div = document.createElement('div');
+        div.textContent = r.name;
+        div.className = 'suggestion-item';
+        div.addEventListener('click', () => {
+          searchInput.value = r.name;
+          suggestions.innerHTML = '';
+          renderMenu(r);
+        });
+        suggestions.appendChild(div);
       });
+      if (list.length === 0) {
+        suggestions.innerHTML = '<div class="suggestion-item">No results found</div>';
+      }
     }
 
-    // Render the menu for a selected restaurant
     function renderMenu(restaurant) {
       menuContainer.innerHTML = '';
-      if (!restaurant) return;
       restaurant.menu.forEach(item => {
         const card = document.createElement('div');
         card.className = 'restaurant-card';
         card.innerHTML = `
           <div class="menu-item">
-            <h3>${item.name} - $${item.price.toFixed(2)}</h3>
+            <h4>${item.name} - $${item.price.toFixed(2)}</h4>
             <p>${item.description}</p>
             <p class="ingredients"><strong>Ingredients:</strong> ${item.ingredients.join(', ')}</p>
           </div>
@@ -106,22 +197,19 @@
       });
     }
 
-    // Initial population
-    populateDropdown(data);
-
-    // Handle restaurant selection change
-    select.addEventListener('change', e => {
-      const selected = data.find(r => r.id === e.target.value);
-      renderMenu(selected);
-    });
-
-    // Filter restaurants as user types
     searchInput.addEventListener('input', e => {
-      const query = e.target.value.toLowerCase();
+      const query = e.target.value.toLowerCase().trim();
+      if (!query) {
+        suggestions.innerHTML = '';
+        menuContainer.innerHTML = '';
+        return;
+      }
       const filtered = data.filter(r => r.name.toLowerCase().includes(query));
-      populateDropdown(filtered);
-      menuContainer.innerHTML = '';
+      showSuggestions(filtered);
     });
+
+    // Optional: show all on focus
+    searchInput.addEventListener('focus', () => showSuggestions(data));
   </script>
 </body>
 </html>
