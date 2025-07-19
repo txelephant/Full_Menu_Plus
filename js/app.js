@@ -1,4 +1,4 @@
-// js/app.js
+// js/app.js  (no photos, no prices)
 (async () => {
   const dataFolder = 'data/';
 
@@ -20,10 +20,10 @@
     );
   } catch (err) {
     console.error('Data load error:', err);
-    return;               // stop setup so we don't hit undefined
+    return;
   }
 
-  // 2. DOM references
+  // 2. DOM refs
   const searchInput   = document.getElementById('restaurantSearch');
   const suggestions   = document.getElementById('suggestions');
   const menuContainer = document.getElementById('menuContainer');
@@ -34,16 +34,16 @@
       ? list.map(r => `<div class="suggestion-item" data-id="${r.id}">${r.name}</div>`).join('')
       : '<div class="suggestion-item">No results found</div>';
   }
+
   function renderMenu(restaurant) {
     menuContainer.innerHTML = `
       <div class="restaurant-card">
-        <img src="${restaurant.image}" alt="${restaurant.name}">
         <h3>${restaurant.name}</h3>
       </div>
       ${restaurant.menu.map(item => `
         <div class="restaurant-card">
           <div class="menu-item">
-            <h4>${item.name} - $${item.price.toFixed(2)}</h4>
+            <h4>${item.name}</h4>
             <p>${item.description}</p>
             <p class="ingredients"><strong>Ingredients:</strong> ${item.ingredients.join(', ')}</p>
           </div>
