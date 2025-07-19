@@ -31,14 +31,35 @@
   }
 
   /* 3. DOM refs & state ------------------------------------------------ */
-  const searchInput      = document.getElementById('restaurantSearch');
-  const ingredientInput  = document.getElementById('ingredientSearch');
-  const suggestions      = document.getElementById('suggestions');
-  const menuContainer    = document.getElementById('menuContainer');
-  let currentRestaurant  = null;
-  let activeIndex        = -1;
+  const searchInput     = document.getElementById('restaurantSearch');
+  const ingredientInput = document.getElementById('ingredientSearch');
+  const expandBtn       = document.getElementById('expandAll');
+  const collapseBtn     = document.getElementById('collapseAll');
+  const suggestions     = document.getElementById('suggestions');
+  const menuContainer   = document.getElementById('menuContainer');
+  let currentRestaurant = null;
+  let activeIndex       = -1;
 
-  /* 4. Render helpers ------------------------------------------------ */
+  /* 4. Helper to toggle all items */
+  function setAll(open) {
+    const contents = menuContainer.querySelectorAll('.ingredients-content');
+    contents.forEach(content => {
+      const idx = content.getAttribute('data-idx');
+      const btn = menuContainer.querySelector(`.toggle-btn[data-idx="${idx}"]`);
+      if (open) {
+        content.style.maxHeight = content.scrollHeight + 'px';
+        btn.textContent = 'Hide ingredients';
+      } else {
+        content.style.maxHeight = '0';
+        btn.textContent = 'Show ingredients';
+      }
+    });
+  }
+
+  expandBtn.addEventListener('click', () => setAll(true));
+  collapseBtn.addEventListener('click', () => setAll(false));
+
+  /* 5. Render helpers ------------------------------------------------ */
   function showSuggestions(list) {
     suggestions.innerHTML = list.length
       ? list.map((r, i) => `<div class="suggestion-item" data-id="${r.id}" data-index="${i}">${r.name}</div>`).join('')
@@ -107,7 +128,7 @@
     });
   }
 
-  /* 5. Events -------------------------------------------------------- */
+  /* 6. Events -------------------------------------------------------- */
   searchInput.addEventListener('input', e => {
     const q = e.target.value.toLowerCase().trim();
     if (!q) {
