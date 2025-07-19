@@ -14,32 +14,30 @@
       color: #333;
     }
     header {
-      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: #005f73;
+    }
+    header img {
+      width: 120px;
+      height: auto;
+      border-radius: 8px;
       box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-      background: #fff; /* white behind banner */
     }
-    /* Banner image container now expands to full image height */
-    .banner {
-      width: 100%;
-      height: auto;
-      overflow: visible;
+    .header-text h1 {
+      font-size: 3rem;
+      margin: 0;
+      color: #ffdd57;
+      text-transform: uppercase;
+      text-shadow: 2px 2px #00363a;
     }
-    /* Show full image at natural aspect ratio */
-    .banner img {
-      width: 100%;
-      height: auto;
-      object-fit: none;
-      display: block;
-    }
-    /* Header text styling */
-    header h1 {
-      margin: 1rem 0 0;
-      font-weight: 600;
-      color: #005f73;
-    }
-    header p {
-      margin: 0.25rem 0 1rem;
-      color: #005f73;
+    .header-text p {
+      margin: 0;
+      color: #fff;
+      font-size: 1.1rem;
     }
     main {
       padding: 1rem;
@@ -118,14 +116,12 @@
 </head>
 <body>
   <header>
-    <div class="banner">
-      <!-- Drop your banner into images/banner.jpg -->
-      <img src="Ingredient%20Insider%20Logo.jpg" alt="Ingredient Insider Banner" />
+    <img src="Ingredient%20Insider%20Logo.jpg" alt="Ingredient Insider Logo" />
+    <div class="header-text">
+      <h1>Ingredient Insider</h1>
+      <p>Full ingredient lists for Brownsville eateries</p>
     </div>
-    <h1>Ingredient Insider</h1>
-    <p>Full ingredient lists for Brownsville eateries</p>
   </header>
-
   <main>
     <div class="search-container">
       <input type="text" id="restaurantSearch" placeholder="Search restaurants..." autocomplete="off" />
@@ -133,7 +129,6 @@
     </div>
     <div class="restaurant-list" id="menuContainer"></div>
   </main>
-
   <script>
     const data = [
       {
@@ -141,7 +136,21 @@
         name: 'Liberty Kitchen & Oysterette',
         image: 'images/liberty-kitchen.jpg',
         menu: [
-          { /* ... */ }
+          {
+            name: "Oyster Po' Boy",
+            description: 'Fried oysters with fresh fixings',
+            ingredients: [
+              'Oysters', 'Flour', 'Egg', 'Breadcrumbs', 'Salt', 'Pepper',
+              'Cooking oil', 'Lettuce', 'Tomato', 'Pickles', 'Tartar sauce', 'Baguette roll'
+            ],
+            price: 15.99
+          },
+          {
+            name: 'Chargrilled Oysters',
+            description: 'Oysters baked with garlic butter and cheese',
+            ingredients: ['Oysters', 'Garlic', 'Butter', 'Parmesan cheese', 'Breadcrumbs', 'Parsley', 'Lemon'],
+            price: 12.49
+          }
         ]
       },
       {
@@ -149,7 +158,18 @@
         name: "Ridley's Bar-B-Q",
         image: 'images/ridleys-bbq.jpg',
         menu: [
-          { /* ... */ }
+          {
+            name: 'Brisket Sandwich',
+            description: 'Smoked brisket piled high',
+            ingredients: ['Smoked brisket', 'BBQ sauce', 'Texas toast', 'Pickles', 'Onions'],
+            price: 9.99
+          },
+          {
+            name: 'BBQ Beans',
+            description: 'Sweet and savory baked beans',
+            ingredients: ['Pinto beans', 'Bacon', 'Onion', 'Brown sugar', 'Mustard', 'BBQ sauce', 'Salt', 'Pepper'],
+            price: 4.49
+          }
         ]
       },
       {
@@ -157,15 +177,24 @@
         name: 'La Terraza Mexican Restaurant',
         image: 'images/la-terraza.jpg',
         menu: [
-          { /* ... */ }
+          {
+            name: 'Carne Asada Tacos',
+            description: 'Grilled steak tacos with fresh toppings',
+            ingredients: ['Corn tortillas', 'Flank steak', 'Onion', 'Cilantro', 'Lime', 'Salt'],
+            price: 8.99
+          },
+          {
+            name: 'Chicken Fajitas',
+            description: 'Sizzling chicken with peppers & onions',
+            ingredients: ['Flour tortillas', 'Chicken breast', 'Bell peppers', 'Onion', 'Fajita seasoning', 'Butter', 'Sour cream', 'Guacamole', 'Cheese'],
+            price: 11.99
+          }
         ]
       }
     ];
-
     const searchInput = document.getElementById('restaurantSearch');
     const suggestions = document.getElementById('suggestions');
     const menuContainer = document.getElementById('menuContainer');
-
     function showSuggestions(list) {
       suggestions.innerHTML = '';
       list.forEach(r => {
@@ -183,7 +212,6 @@
         suggestions.innerHTML = '<div class="suggestion-item">No results found</div>';
       }
     }
-
     function renderMenu(restaurant) {
       menuContainer.innerHTML = '';
       const headerCard = document.createElement('div');
@@ -206,14 +234,12 @@
         menuContainer.appendChild(itemCard);
       });
     }
-
     searchInput.addEventListener('input', e => {
       const query = e.target.value.toLowerCase().trim();
       if (!query) { suggestions.innerHTML = ''; menuContainer.innerHTML = ''; return; }
       const filtered = data.filter(r => r.name.toLowerCase().includes(query));
       showSuggestions(filtered);
     });
-
     searchInput.addEventListener('focus', () => showSuggestions(data));
   </script>
 </body>
