@@ -2,39 +2,33 @@
   "id": "jolie-petite",
   "name": "Jolie Petite",
   "menu": [
-    /* ---------- Brunch Menu · Daily Specials ---------- */
-    { "category": "Brunch Menu / Daily Specials", "name": "Market Fruit & Yogurt Bowl", "description": "", "ingredients": [] },
-    { "category": "Brunch Menu / Daily Specials", "name": "Supreme Bagel Lox", "description": "", "ingredients": [] },
+    { "category": "Brunch Menu · Daily Specials", "name": "Market Fruit & Yogurt Bowl", "description": "", "ingredients": [] },
+    { "category": "Brunch Menu · Daily Specials", "name": "Supreme Bagel Lox", "description": "", "ingredients": [] },
 
-    /* ---------- Summer Menu ---------- */
-    { "category": "Summer Menu", "name": "French Dip Sandwich", "description": "", "ingredients": [] },
-    { "category": "Summer Menu", "name": "French Crepe", "description": "", "ingredients": [] },
-    { "category": "Summer Menu", "name": "Savory Croissant Strata", "description": "", "ingredients": [] },
-    { "category": "Summer Menu", "name": "Nicoise Salad", "description": "", "ingredients": [] },
-    { "category": "Summer Menu", "name": "Florentine Pasta", "description": "", "ingredients": [] },
-    { "category": "Summer Menu", "name": "Summer Risotto", "description": "", "ingredients": [] },
+    { "category": "Summer Menu", "name": "French Dip Sandwich", "description": "", "ingredients": [] },
+    { "category": "Summer Menu", "name": "French Crepe", "description": "", "ingredients": [] },
+    { "category": "Summer Menu", "name": "Savory Croissant Strata", "description": "", "ingredients": [] },
+    { "category": "Summer Menu", "name": "Nicoise Salad", "description": "", "ingredients": [] },
+    { "category": "Summer Menu", "name": "Florentine Pasta", "description": "", "ingredients": [] },
+    { "category": "Summer Menu", "name": "Summer Risotto", "description": "", "ingredients": [] },
 
-    /* ---------- Hors D'oeuvres ---------- */
-    { "category": "Hors D'oeuvres", "name": "Assiette de Fruits", "description": "Market fresh fruit with seasonal whipped cream", "ingredients": [] },
-    { "category": "Hors D'oeuvres", "name": "Baguette à Raclette", "description": "Baguette topped with melted raclette cheese and prosciutto", "ingredients": [] },
-    { "category": "Hors D'oeuvres", "name": "Croquettes (5)", "description": "Bite‑size croquettes filled with ham and cheese with mornay sauce", "ingredients": [] },
-    { "category": "Hors D'oeuvres", "name": "Escargot à la Bourguignonne", "description": "Escargot with herb butter and puff pastry", "ingredients": [] },
-    { "category": "Hors D'oeuvres", "name": "Petite Biscuits & Jam", "description": "Flaky butter mini biscuits, homemade jam & whipped butter", "ingredients": [] },
+    { "category": "Hors D'oeuvres", "name": "Assiette de Fruits", "description": "Market fresh fruit with seasonal whipped cream", "ingredients": [] },
+    { "category": "Hors D'oeuvres", "name": "Baguette à Raclette", "description": "Baguette topped with melted raclette cheese and prosciutto", "ingredients": [] },
+    { "category": "Hors D'oeuvres", "name": "Croquettes (5)", "description": "Bite‑size croquettes filled with ham and cheese with mornay sauce", "ingredients": [] },
+    { "category": "Hors D'oeuvres", "name": "Escargot à la Bourguignonne", "description": "Escargot with herb butter and puff pastry", "ingredients": [] },
+    { "category": "Hors D'oeuvres", "name": "Petite Biscuits & Jam", "description": "Flaky butter mini biscuits, homemade jam & whipped butter", "ingredients": [] },
 
-    /* ---------- Soupe et Salades ---------- */
-    { "category": "Soupe et Salades", "name": "Soupe à l'Oignon", "description": "Classic French onion soup with 15‑hour broth, French bread & melted Gruyère", "ingredients": [] },
-    { "category": "Soupe et Salades", "name": "Salade de Chèvre Chaud", "description": "Pan‑fried goat cheese, walnuts, pear, mixed greens & seasonal vinaigrette", "ingredients": [] },
-    { "category": "Soupe et Salades", "name": "Roasted Red Pepper Soupe à la Tomate", "description": "Fire‑roasted pepper & tomato soup, basil oil, Gruyère & pistachios", "ingredients": [] },
-    { "category": "Soupe et Salades", "name": "Salade de Campagne Française", "description": "Greens, apple, cucumber, pecans, cranberries, cheese & white‑wine vinaigrette", "ingredients": [] },
+    { "category": "Soupe et Salades", "name": "Soupe à l'Oignon", "description": "Classic French onion soup with 15‑hour broth, French bread & melted Gruyère", "ingredients": [] },
+    { "category": "Soupe et Salades", "name": "Salade de Chèvre Chaud", "description": "Pan‑fried goat cheese, walnuts, pear, mixed greens & seasonal vinaigrette", "ingredients": [] },
+    { "category": "Soupe et Salades", "name": "Roasted Red Pepper Soupe à la Tomate", "description": "Fire‑roasted pepper & tomato soup, basil oil, Gruyère & pistachios", "ingredients": [] },
+    { "category": "Soupe et Salades", "name": "Salade de Campagne Française", "description": "Greens, apple, cucumber, pecans, cranberries, cheese & white‑wine vinaigrette", "ingredients": [] },
 
-    /* ---------- Plats Sucrés ---------- */
-    { "category": "Plats Sucrés", "name": "Crêpe au Citron et à la Ricotta", "description": "Three lemon‑ricotta pancakes with blueberry compote & maple syrup", "ingredients": [] },
-    { "category": "Plats Sucrés", "name": "Pain Perdu à la Crème Brûlée", "description": "Crème‑brûlée French toast tower", "ingredients": [] },
-    { "category": "Plats Sucrés", "name": "Seasonal French Toast (Strawberry Shortcake)", "description": "", "ingredients": [] },
-    { "category": "Plats Sucrés", "name": "French Toast Casserole", "description": "", "ingredients": [] },
-    { "category": "Plats Sucrés", "name": "Seasonal Pancakes (Strawberry Shortcake)", "description": "", "ingredients": [] },
+    { "category": "Plats Sucrés", "name": "Crêpe au Citron et à la Ricotta", "description": "Three lemon‑ricotta pancakes with blueberry compote & maple syrup", "ingredients": [] },
+    { "category": "Plats Sucrés", "name": "Pain Perdu à la Crème Brûlée", "description": "Crème‑brûlée French toast tower", "ingredients": [] },
+    { "category": "Plats Sucrés", "name": "Seasonal French Toast (Strawberry Shortcake)", "description": "", "ingredients": [] },
+    { "category": "Plats Sucrés", "name": "French Toast Casserole", "description": "", "ingredients": [] },
+    { "category": "Plats Sucrés", "name": "Seasonal Pancakes (Strawberry Shortcake)", "description": "", "ingredients": [] },
 
-    /* ---------- Sandwichs ---------- */
     { "category": "Sandwichs", "name": "Croque Monsieur", "description": "Jambon de Paris, Gruyère & Mornay on brioche", "ingredients": [] },
     { "category": "Sandwichs", "name": "Croque Madame", "description": "Croque Monsieur topped with a fried egg", "ingredients": [] },
     { "category": "Sandwichs", "name": "Salade au Poulet", "description": "Chicken‑salad croissant sandwich with arugula salad or chips", "ingredients": [] },
@@ -42,21 +36,19 @@
     { "category": "Sandwichs", "name": "French Onion Burger", "description": "Double burger, garlic aioli, Gruyère, French onions & frites", "ingredients": [] },
     { "category": "Sandwichs", "name": "Croissant Sandwich", "description": "Bacon, egg, Brie & avocado in a warm croissant with arugula salad", "ingredients": [] },
 
-    /* ---------- Les Plats Principaux ---------- */
-    { "category": "Les Plats Principaux", "name": "Omelette Française", "description": "Boursin cheese, chives & arugula salad", "ingredients": [] },
-    { "category": "Les Plats Principaux", "name": "Quiche Lorraine", "description": "Bacon lardons, Gruyère cheese & arugula salad", "ingredients": [] },
-    { "category": "Les Plats Principaux", "name": "Quiche Florentine", "description": "Spinach, leeks, Gruyère & arugula salad", "ingredients": [] },
-    { "category": "Les Plats Principaux", "name": "Canard et Gaufre", "description": "Duck leg & waffles with mustard maple syrup", "ingredients": [] },
-    { "category": "Les Plats Principaux", "name": "Crabe Benedictine", "description": "Crab cakes, poached eggs & hollandaise, roasted potatoes", "ingredients": [] },
-    { "category": "Les Plats Principaux", "name": "Bistecca et Frites", "description": "New York strip with Mornay sauce & frites", "ingredients": [] },
-    { "category": "Les Plats Principaux", "name": "Toast à l'Avocat", "description": "Avocado toast with pesto & sundried tomatoes", "ingredients": [] },
-    { "category": "Les Plats Principaux", "name": "Vegan Avocado Toast", "description": "", "ingredients": [] },
-    { "category": "Les Plats Principaux", "name": "Croissant Benedict", "description": "Croissant with Jambon de Paris or salmon & hollandaise", "ingredients": [] },
-    { "category": "Les Plats Principaux", "name": "European Breakfast Platter", "description": "3 poached eggs, charcuterie, fruit or potatoes, toast, pastry & pesto", "ingredients": [] },
-    { "category": "Les Plats Principaux", "name": "Biscuits & Duck Gravy", "description": "Biscuit, duck gravy, roasted potatoes, two eggs", "ingredients": [] },
-    { "category": "Les Plats Principaux", "name": "American Breakfast Platter", "description": "2 eggs, bacon or sausage, potatoes, toast & mini pancakes", "ingredients": [] },
+    { "category": "Les Plats Principaux", "name": "Omelette Française", "description": "Boursin cheese, chives & arugula salad", "ingredients": [] },
+    { "category": "Les Plats Principaux", "name": "Quiche Lorraine", "description": "Bacon lardons, Gruyère cheese & arugula salad", "ingredients": [] },
+    { "category": "Les Plats Principaux", "name": "Quiche Florentine", "description": "Spinach, leeks, Gruyère & arugula salad", "ingredients": [] },
+    { "category": "Les Plats Principaux", "name": "Canard et Gaufre", "description": "Duck leg & waffles with mustard maple syrup", "ingredients": [] },
+    { "category": "Les Plats Principaux", "name": "Crabe Benedictine", "description": "Crab cakes, poached eggs & hollandaise, roasted potatoes", "ingredients": [] },
+    { "category": "Les Plats Principaux", "name": "Bistecca et Frites", "description": "New York strip with Mornay sauce & frites", "ingredients": [] },
+    { "category": "Les Plats Principaux", "name": "Toast à l'Avocat", "description": "Avocado toast with pesto & sundried tomatoes", "ingredients": [] },
+    { "category": "Les Plats Principaux", "name": "Vegan Avocado Toast", "description": "", "ingredients": [] },
+    { "category": "Les Plats Principaux", "name": "Croissant Benedict", "description": "Croissant with Jambon de Paris or salmon & hollandaise", "ingredients": [] },
+    { "category": "Les Plats Principaux", "name": "European Breakfast Platter", "description": "3 poached eggs, charcuterie, fruit or potatoes, toast, pastry & pesto", "ingredients": [] },
+    { "category": "Les Plats Principaux", "name": "Biscuits & Duck Gravy", "description": "Biscuit, duck gravy, roasted potatoes, two eggs", "ingredients": [] },
+    { "category": "Les Plats Principaux", "name": "American Breakfast Platter", "description": "2 eggs, bacon or sausage, potatoes, toast & mini pancakes", "ingredients": [] },
 
-    /* ---------- Sides ---------- */
     { "category": "Sides", "name": "Parmesan Truffle Frites", "description": "", "ingredients": [] },
     { "category": "Sides", "name": "Roasted Potatoes", "description": "", "ingredients": [] },
     { "category": "Sides", "name": "Pecan Crusted Bacon Strips (4)", "description": "", "ingredients": [] },
@@ -64,7 +56,6 @@
     { "category": "Sides", "name": "Bacon Strips", "description": "", "ingredients": [] },
     { "category": "Sides", "name": "Cup of Fruit", "description": "", "ingredients": [] },
 
-    /* ---------- Drinks ---------- */
     { "category": "Drinks", "name": "Lemonade", "description": "", "ingredients": [] },
     { "category": "Drinks", "name": "Sparkling Water", "description": "", "ingredients": [] },
     { "category": "Drinks", "name": "Iced Tea", "description": "", "ingredients": [] },
@@ -77,23 +68,20 @@
     { "category": "Drinks", "name": "Joya", "description": "", "ingredients": [] },
     { "category": "Drinks", "name": "Saratoga", "description": "", "ingredients": [] },
 
-    /* ---------- Kids ---------- */
     { "category": "Kids", "name": "Pancake with Fruit", "description": "", "ingredients": [] },
     { "category": "Kids", "name": "Chicken Patty & Fries", "description": "", "ingredients": [] },
     { "category": "Kids", "name": "Coin Pancakes (6)", "description": "", "ingredients": [] },
 
-    /* ---------- Coffee & Tea ---------- */
     { "category": "Coffee & Tea", "name": "Drip Coffee", "description": "Ground coffee beans brewed with hot water", "ingredients": [] },
     { "category": "Coffee & Tea", "name": "Espresso", "description": "Thick, bold espresso with a layer of crema", "ingredients": [] },
     { "category": "Coffee & Tea", "name": "Cappuccino", "description": "Espresso with steamed milk & rich foam", "ingredients": [] },
     { "category": "Coffee & Tea", "name": "Café Latte", "description": "Espresso with steamed milk & light foam", "ingredients": [] },
     { "category": "Coffee & Tea", "name": "Americano", "description": "", "ingredients": [] },
     { "category": "Tea", "name": "Breakfast English Tea", "description": "Full‑bodied black‑tea blend", "ingredients": [] },
-    { "category": "Tea", "name": "Earl Grey Tea", "description": "Black tea with floral & citrus notes", "ingredients": [] },
+    { "category": "Tea", "name": "Earl Grey Tea", "description": "Black tea with floral & citrus notes", "ingredients": [] },
     { "category": "Tea", "name": "Green Tea", "description": "Sweet, earthy & grassy", "ingredients": [] },
     { "category": "Tea", "name": "Jasmine Tea", "description": "Floral, sweet & delicate", "ingredients": [] },
 
-    /* ---------- Specialty Lattes & Other Drinks ---------- */
     { "category": "Specialty Drinks", "name": "French Hot Chocolate", "description": "", "ingredients": [] },
     { "category": "Specialty Drinks", "name": "London Fog", "description": "", "ingredients": [] },
     { "category": "Specialty Drinks", "name": "Chai Latte", "description": "", "ingredients": [] },
@@ -104,7 +92,6 @@
     { "category": "Specialty Drinks", "name": "Honey Rose Latte", "description": "", "ingredients": [] },
     { "category": "Specialty Drinks", "name": "Frozen French Hot Chocolate", "description": "", "ingredients": [] },
 
-    /* ---------- Pastries ---------- */
     { "category": "Pastries", "name": "Mini Birthday Cake", "description": "", "ingredients": [] },
     { "category": "Pastries", "name": "Croissant", "description": "Classic buttery flaky dough", "ingredients": [] },
     { "category": "Pastries", "name": "Almond Croissant", "description": "Croissant filled with almond mixture & topped with almonds", "ingredients": [] },
