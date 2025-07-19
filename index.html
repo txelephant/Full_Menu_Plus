@@ -2,88 +2,58 @@
 <html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ingredient Insider</title>
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap"
-    rel="stylesheet"
-  />
-  <link href="styles.css" rel="stylesheet"/>
-
-  <!-- Override layout so inputs sit in a row, and buttons stay right -->
-  <style>
-    .controls {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 1rem;
-      padding: 1rem;
-    }
-    .search-container {
-      display: flex;
-      flex-direction: row;
-      gap: 0.5rem;
-      flex: 1 1 60%;
-      max-width: none;
-    }
-    .search-container input {
-      flex: 1;
-      padding: 0.5rem;
-      font-size: 1rem;
-    }
-    .buttons {
-      display: flex;
-      gap: 0.5rem;
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="styles.css" rel="stylesheet" />
 </head>
 <body>
   <!-- Hero -->
   <header class="hero">
-    <img
-      src="images/banner.jpg"
-      alt="Ingredient Insider Banner"
-      class="hero-img"
-    />
+    <img src="images/banner.jpg" alt="Ingredient Insider Banner" class="hero-img">
     <div class="overlay">
       <h1>Ingredient Insider</h1>
     </div>
   </header>
 
-  <!-- SEARCH + BUTTONS -->
-  <div class="controls">
-    <div class="search-container">
-      <input
-        id="restaurantSearch"
-        type="text"
-        placeholder="Search restaurants…"
-        autocomplete="off"
-      />
-      <input
-        id="itemSearch"
-        type="text"
-        placeholder="Search menu items by name…"
-        autocomplete="off"
-      />
-      <input
-        id="ingredientSearch"
-        type="text"
-        placeholder="Filter by ingredient…"
-        autocomplete="off"
-      />
-    </div>
-    <div class="buttons">
-      <button id="expandAll">Expand All</button>
-      <button id="collapseAll">Collapse All</button>
-      <button id="themeToggle" aria-label="Toggle theme">🌙</button>
-    </div>
+  <!-- Tagline, theme toggle, and search -->
+  <div class="intro-controls" style="display:flex; align-items:center; justify-content:space-between; max-width:640px; margin:1.5rem auto;">
+    <p class="tagline" style="margin:0; font-size:1.2rem; color:var(--contrast-text);">Full ingredient lists for Brownsville eateries</p>
+    <!-- Dark mode toggle -->
+    <button id="themeToggle" aria-label="Toggle dark mode" class="theme-toggle" style="font-size:1.5rem; background:none; border:none; cursor:pointer;">🌙</button>
   </div>
 
-  <!-- Menu will render here -->
-  <main id="menuContainer" class="menu-container"></main>
+  <main>
+    <div class="search-container">
+      <input id="restaurantSearch" placeholder="Search restaurants…" autocomplete="off" />
+      <input id="ingredientSearch" placeholder="Filter by ingredient…" autocomplete="off" />
+      <div id="suggestions" class="suggestions"></div>
+      <!-- Expand/Collapse All controls -->
+      <div class="batch-toggle">
+        <button id="expandAll" class="batch-btn">Expand All</button>
+        <button id="collapseAll" class="batch-btn">Collapse All</button>
+      </div>
+    </div>
+    <div id="menuContainer" class="restaurant-list"></div>
+  </main>
 
-  <!-- make sure this path matches your file structure -->
+  <!-- Main JS bundle -->
   <script src="js/app.js" type="module"></script>
+  <script>
+    // Dark mode toggle logic
+    const themeToggle = document.getElementById('themeToggle');
+    const root = document.documentElement;
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    root.setAttribute('data-theme', savedTheme);
+    themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+    themeToggle.addEventListener('click', () => {
+      const current = root.getAttribute('data-theme');
+      const next = current === 'light' ? 'dark' : 'light';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      themeToggle.textContent = next === 'dark' ? '☀️' : '🌙';
+    });
+  </script>
 </body>
 </html>
