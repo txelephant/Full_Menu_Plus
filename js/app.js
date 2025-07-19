@@ -1,27 +1,46 @@
 // js/app.js
-const dataFolder = 'data/';           // adjust if you host in a sub‑folder
-const fileList  = [
-  'liberty-kitchen.json',
-  'ridleys-bbq.json',
-  'la-terraza.json',
+// -------------------------------------------------------------------
+// Loads restaurant JSON files, powers the search box & menu rendering
+// -------------------------------------------------------------------
+
+// Folder where your JSON files live (relative to index.html)
+const dataFolder = 'data/';
+
+// List ONLY the files that currently exist in /data/
+// Add more filenames here whenever you create new JSON files.
+const fileList = [
+  'la-terraza.json'
 ];
 
+// --------------------------------------------------
 // 1. Load every JSON file in parallel
+// --------------------------------------------------
 const restaurantData = await Promise.all(
-  fileList.map(file => fetch(dataFolder + file).then(r => r.json()))
+  fileList.map(file =>
+    fetch(`${dataFolder}${file}`)
+      .then(r => {
+        if (!r.ok) throw new Error(`${file} not found`);
+        return r.json();
+      })
+  )
 );
 
+// --------------------------------------------------
 // 2. DOM references
+// --------------------------------------------------
 const searchInput   = document.getElementById('restaurantSearch');
 const suggestions   = document.getElementById('suggestions');
 const menuContainer = document.getElementById('menuContainer');
 
+// --------------------------------------------------
 // 3. Render helpers
+// --------------------------------------------------
 function showSuggestions(list) {
   suggestions.innerHTML = list.length
     ? list.map(r => `<div class="suggestion-item" data-id="${r.id}">${r.name}</div>`).join('')
     : '<div class="suggestion-item">No results found</div>';
 }
+
 function renderMenu(restaurant) {
   menuContainer.innerHTML = `
     <div class="restaurant-card">
@@ -40,13 +59,16 @@ function renderMenu(restaurant) {
   `;
 }
 
-// 4. Events
+// --------------------------------------------------
+// 4. Event listeners
+// --------------------------------------------------
 searchInput.addEventListener('input', e => {
   const q = e.target.value.toLowerCase().trim();
-  if (!q) { suggestions.innerHTML = ''; menuContainer.innerHTML=''; return; }
+  if (!q) { suggestions.innerHTML = ''; menuContainer.innerHTML = ''; return; }
   const matches = restaurantData.filter(r => r.name.toLowerCase().includes(q));
   showSuggestions(matches);
 });
+
 suggestions.addEventListener('click', e => {
   if (e.target.matches('.suggestion-item')) {
     const rest = restaurantData.find(r => r.id === e.target.dataset.id);
@@ -55,12 +77,13 @@ suggestions.addEventListener('click', e => {
     renderMenu(rest);
   }
 });
+
 searchInput.addEventListener('keydown', e => {
   if (e.key === 'Enter') {
     const q = searchInput.value.toLowerCase().trim();
     const match = restaurantData.find(r => r.name.toLowerCase().includes(q));
-    if (match) { suggestions.innerHTML=''; renderMenu(match); }
+    if (match) { suggestions.innerHTML = ''; renderMenu(match); }
   }
 });
-searchInput.addEventListener('focus', () => showSuggestions(restaurantData));
 
+searchInput.addEventListener('focus', () => showSuggestions(restaurantData));
