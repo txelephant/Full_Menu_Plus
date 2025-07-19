@@ -19,11 +19,10 @@
   try {
     restaurantData = await Promise.all(
       fileList.map(file =>
-        fetch(`${dataFolder}${file}`)
-          .then(r => {
-            if (!r.ok) throw new Error(`${file} not found`);
-            return r.json();
-          })
+        fetch(`${dataFolder}${file}`).then(r => {
+          if (!r.ok) throw new Error(`${file} not found`);
+          return r.json();
+        })
       )
     );
   } catch (err) {
@@ -31,13 +30,13 @@
     return;
   }
 
-  /* 3. DOM refs ------------------------------------------------------ */
+  /* 3. DOM refs & state ------------------------------------------------ */
   const searchInput      = document.getElementById('restaurantSearch');
   const ingredientInput  = document.getElementById('ingredientSearch');
   const suggestions      = document.getElementById('suggestions');
   const menuContainer    = document.getElementById('menuContainer');
-  let currentRestaurant  = null;  // track active restaurant
-  let activeIndex        = -1;    // track highlighted suggestion
+  let currentRestaurant  = null;
+  let activeIndex        = -1;
 
   /* 4. Render helpers ------------------------------------------------ */
   function showSuggestions(list) {
@@ -54,7 +53,7 @@
   function setActive(idx) {
     clearActive();
     const items = suggestions.querySelectorAll('.suggestion-item');
-    if (items.length && idx >= 0 && idx < items.length) {
+    if (items[idx]) {
       items[idx].classList.add('active');
       activeIndex = idx;
       items[idx].scrollIntoView({ block: 'nearest' });
@@ -69,20 +68,18 @@
   function renderMenu(restaurant, filter = '') {
     currentRestaurant = restaurant;
     const items = filter
-      ? restaurant.menu.filter(item =>
-          item.ingredients.some(ing => ing.toLowerCase().includes(filter))
-        )
+      ? restaurant.menu.filter(item => item.ingredients.some(ing => ing.toLowerCase().includes(filter)))
       : restaurant.menu;
+
     menuContainer.innerHTML = `
-      <div class="restaurant-card">
-        <h3>${restaurant.name}</h3>
-      </div>
-      ${items.map(item => `
+      <div class="restaurant-card"><h3>${restaurant.name}</h3></div>
+      ${items.map((item, idx) => `
         <div class="restaurant-card">
           <div class="menu-item">
             <h4>${item.name}</h4>
             ${item.description ? `<p>${item.description}</p>` : ``}
-            <div class="ingredients">
+            <button class="toggle-btn" data-idx="${idx}">Show ingredients</button>
+            <div class="ingredients-content" data-idx="${idx}" style="max-height:0; overflow:hidden; transition:max-height 0.3s ease;">
               <strong>Ingredients:</strong>
               ${item.ingredients.length
                 ? `<ul>${item.ingredients.map(ing => `<li>${ing}</li>`).join('')}</ul>`
@@ -92,6 +89,22 @@
         </div>
       `).join('')}
     `;
+
+    // attach toggle listeners
+    menuContainer.querySelectorAll('.toggle-btn').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const idx = btn.getAttribute('data-idx');
+        const content = menuContainer.querySelector(`.ingredients-content[data-idx="${idx}"]`);
+        const isOpen = content.style.maxHeight && content.style.maxHeight !== '0px';
+        if (isOpen) {
+          content.style.maxHeight = '0';
+          btn.textContent = 'Show ingredients';
+        } else {
+          content.style.maxHeight = content.scrollHeight + 'px';
+          btn.textContent = 'Hide ingredients';
+        }
+      });
+    });
   }
 
   /* 5. Events -------------------------------------------------------- */
@@ -111,20 +124,10 @@
   searchInput.addEventListener('keydown', e => {
     const items = suggestions.querySelectorAll('.suggestion-item');
     if (!items.length) return;
-
     switch (e.key) {
-      case 'ArrowDown':
-        e.preventDefault();
-        setActive((activeIndex + 1) % items.length);
-        break;
-      case 'ArrowUp':
-        e.preventDefault();
-        setActive((activeIndex - 1 + items.length) % items.length);
-        break;
-      case 'Enter':
-        e.preventDefault();
-        if (activeIndex >= 0) selectActive();
-        break;
+      case 'ArrowDown': e.preventDefault(); setActive((activeIndex + 1) % items.length); break;
+      case 'ArrowUp': e.preventDefault(); setActive((activeIndex - 1 + items.length) % items.length); break;
+      case 'Enter': e.preventDefault(); selectActive(); break;
     }
   });
 
@@ -137,16 +140,11 @@
     renderMenu(rest);
   });
 
-  // ingredient filter
   ingredientInput.addEventListener('input', e => {
     if (!currentRestaurant) return;
     const filter = e.target.value.toLowerCase().trim();
     renderMenu(currentRestaurant, filter);
   });
 
-  // focus shows all
-  searchInput.addEventListener('focus', () => {
-    showSuggestions(restaurantData);
-    clearActive();
-  });
+  searchInput.addEventListener('focus', () => { showSuggestions(restaurantData); clearActive(); });
 })();
