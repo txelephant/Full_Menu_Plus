@@ -2,115 +2,557 @@
   "id": "jolie-petite",
   "name": "Jolie Petite",
   "menu": [
-    { "category": "Brunch Menu · Daily Specials", "name": "Market Fruit & Yogurt Bowl", "ingredients": [] },
-    { "category": "Brunch Menu · Daily Specials", "name": "Supreme Bagel Lox", "ingredients": [] },
-
-    { "category": "Summer Menu", "name": "French Dip Sandwich", "ingredients": [] },
-    { "category": "Summer Menu", "name": "French Crepe", "ingredients": [] },
-    { "category": "Summer Menu", "name": "Savory Croissant Strata", "ingredients": [] },
-    { "category": "Summer Menu", "name": "Nicoise Salad", "ingredients": [] },
-    { "category": "Summer Menu", "name": "Florentine Pasta", "ingredients": [] },
-    { "category": "Summer Menu", "name": "Summer Risotto", "ingredients": [] },
-
-    { "category": "Hors D'oeuvres", "name": "Assiette de Fruits", "ingredients": [] },
-    { "category": "Hors D'oeuvres", "name": "Baguette à Raclette", "ingredients": [] },
-    { "category": "Hors D'oeuvres", "name": "Croquettes (5)", "ingredients": [] },
-    { "category": "Hors D'oeuvres", "name": "Escargot à la Bourguignonne", "ingredients": [] },
-    { "category": "Hors D'oeuvres", "name": "Petite Biscuits & Jam", "ingredients": [] },
-
-    { "category": "Soupe et Salades", "name": "Soupe à l'Oignon", "ingredients": [] },
-    { "category": "Soupe et Salades", "name": "Salade de Chèvre Chaud", "ingredients": [] },
-    { "category": "Soupe et Salades", "name": "Roasted Red Pepper Soupe à la Tomate", "ingredients": [] },
-    { "category": "Soupe et Salades", "name": "Salade de Campagne Française", "ingredients": [] },
-
-    { "category": "Plats Sucrés", "name": "Crêpe au Citron et à la Ricotta", "ingredients": [] },
-    { "category": "Plats Sucrés", "name": "Pain Perdu à la Crème Brûlée", "ingredients": [] },
-    { "category": "Plats Sucrés", "name": "Seasonal French Toast (Strawberry Shortcake)", "ingredients": [] },
-    { "category": "Plats Sucrés", "name": "French Toast Casserole", "ingredients": [] },
-    { "category": "Plats Sucrés", "name": "Seasonal Pancakes (Strawberry Shortcake)", "ingredients": [] },
-
-    { "category": "Sandwichs", "name": "Croque Monsieur", "ingredients": [] },
-    { "category": "Sandwichs", "name": "Croque Madame", "ingredients": [] },
-    { "category": "Sandwichs", "name": "Salade au Poulet", "ingredients": [] },
-    { "category": "Sandwichs", "name": "Poulet Croustillant", "ingredients": [] },
-    { "category": "Sandwichs", "name": "French Onion Burger", "ingredients": [] },
-    { "category": "Sandwichs", "name": "Croissant Sandwich", "ingredients": [] },
-
-    { "category": "Les Plats Principaux", "name": "Omelette Française", "ingredients": [] },
-    { "category": "Les Plats Principaux", "name": "Quiche Lorraine", "ingredients": [] },
-    { "category": "Les Plats Principaux", "name": "Quiche Florentine", "ingredients": [] },
-    { "category": "Les Plats Principaux", "name": "Canard et Gaufre", "ingredients": [] },
-    { "category": "Les Plats Principaux", "name": "Crabe Benedictine", "ingredients": [] },
-    { "category": "Les Plats Principaux", "name": "Bistecca et Frites", "ingredients": [] },
-    { "category": "Les Plats Principaux", "name": "Toast à l'Avocat", "ingredients": [] },
-    { "category": "Les Plats Principaux", "name": "Vegan Avocado Toast", "ingredients": [] },
-    { "category": "Les Plats Principaux", "name": "Croissant Benedict", "ingredients": [] },
-    { "category": "Les Plats Principaux", "name": "European Breakfast Platter", "ingredients": [] },
-    { "category": "Les Plats Principaux", "name": "Biscuits & Duck Gravy", "ingredients": [] },
-    { "category": "Les Plats Principaux", "name": "American Breakfast Platter", "ingredients": [] },
-
-    { "category": "Sides", "name": "Parmesan Truffle Frites", "ingredients": [] },
-    { "category": "Sides", "name": "Roasted Potatoes", "ingredients": [] },
-    { "category": "Sides", "name": "Pecan Crusted Bacon Strips (4)", "ingredients": [] },
-    { "category": "Sides", "name": "Raclette Roasted Potatoes", "ingredients": [] },
-    { "category": "Sides", "name": "Bacon Strips", "ingredients": [] },
-    { "category": "Sides", "name": "Cup of Fruit", "ingredients": [] },
-
-    { "category": "Drinks", "name": "Lemonade", "ingredients": [] },
-    { "category": "Drinks", "name": "Sparkling Water", "ingredients": [] },
-    { "category": "Drinks", "name": "Iced Tea", "ingredients": [] },
-    { "category": "Drinks", "name": "Sweet Tea (Gold Peak)", "ingredients": [] },
-    { "category": "Drinks", "name": "Milk", "ingredients": [] },
-    { "category": "Drinks", "name": "Chocolate Milk", "ingredients": [] },
-    { "category": "Drinks", "name": "Mexican Coke", "ingredients": [] },
-    { "category": "Drinks", "name": "Sodas", "ingredients": [] },
-    { "category": "Drinks", "name": "Juice", "ingredients": [] },
-    { "category": "Drinks", "name": "Joya", "ingredients": [] },
-    { "category": "Drinks", "name": "Saratoga", "ingredients": [] },
-
-    { "category": "Kids", "name": "Pancake with Fruit", "ingredients": [] },
-    { "category": "Kids", "name": "Chicken Patty & Fries", "ingredients": [] },
-    { "category": "Kids", "name": "Coin Pancakes (6)", "ingredients": [] },
-
-    { "category": "Coffee & Tea", "name": "Drip Coffee", "ingredients": [] },
-    { "category": "Coffee & Tea", "name": "Espresso", "ingredients": [] },
-    { "category": "Coffee & Tea", "name": "Cappuccino", "ingredients": [] },
-    { "category": "Coffee & Tea", "name": "Café Latte", "ingredients": [] },
-    { "category": "Coffee & Tea", "name": "Americano", "ingredients": [] },
-
-    { "category": "Tea", "name": "Breakfast English Tea", "ingredients": [] },
-    { "category": "Tea", "name": "Earl Grey Tea", "ingredients": [] },
-    { "category": "Tea", "name": "Green Tea", "ingredients": [] },
-    { "category": "Tea", "name": "Jasmine Tea", "ingredients": [] },
-
-    { "category": "Specialty Drinks", "name": "French Hot Chocolate", "ingredients": [] },
-    { "category": "Specialty Drinks", "name": "London Fog", "ingredients": [] },
-    { "category": "Specialty Drinks", "name": "Chai Latte", "ingredients": [] },
-    { "category": "Specialty Drinks", "name": "Taro Latte", "ingredients": [] },
-    { "category": "Specialty Drinks", "name": "Matcha Latte", "ingredients": [] },
-    { "category": "Specialty Drinks", "name": "Butterfly Pea Flower Matcha Latte", "ingredients": [] },
-    { "category": "Specialty Drinks", "name": "Strawberry Cloud Matcha", "ingredients": [] },
-    { "category": "Specialty Drinks", "name": "Honey Rose Latte", "ingredients": [] },
-    { "category": "Specialty Drinks", "name": "Frozen French Hot Chocolate", "ingredients": [] },
-
-    { "category": "Pastries", "name": "Mini Birthday Cake", "ingredients": [] },
-    { "category": "Pastries", "name": "Croissant", "ingredients": [] },
-    { "category": "Pastries", "name": "Almond Croissant", "ingredients": [] },
-    { "category": "Pastries", "name": "Pain Au Chocolat", "ingredients": [] },
-    { "category": "Pastries", "name": "Roulette Croissant", "ingredients": [] },
-    { "category": "Pastries", "name": "Crookie Croissant", "ingredients": [] },
-    { "category": "Pastries", "name": "Almond Chocolate Croissant", "ingredients": [] },
-    { "category": "Pastries", "name": "Dubai Croissant", "ingredients": [] },
-    { "category": "Pastries", "name": "Croissant Knot", "ingredients": [] },
-    { "category": "Pastries", "name": "Creampuffs", "ingredients": [] },
-    { "category": "Pastries", "name": "Palmiers", "ingredients": [] },
-    { "category": "Pastries", "name": "Espresso & Hazelnut Tart", "ingredients": [] },
-    { "category": "Pastries", "name": "Macarons", "ingredients": [] },
-    { "category": "Pastries", "name": "Macaron Tart", "ingredients": [] },
-    { "category": "Pastries", "name": "Éclairs", "ingredients": [] },
-    { "category": "Pastries", "name": "Crème Brûlée", "ingredients": [] },
-    { "category": "Pastries", "name": "Canelé", "ingredients": [] },
-    { "category": "Pastries", "name": "Danish", "ingredients": [] },
-    { "category": "Pastries", "name": "Baguette", "ingredients": [] }
+    {
+      "category": "Brunch Menu · Daily Specials",
+      "name": "Market Fruit & Yogurt Bowl",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Brunch Menu · Daily Specials",
+      "name": "Supreme Bagel Lox",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Summer Menu",
+      "name": "French Dip Sandwich",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Summer Menu",
+      "name": "French Crepe",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Summer Menu",
+      "name": "Savory Croissant Strata",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Summer Menu",
+      "name": "Nicoise Salad",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Summer Menu",
+      "name": "Florentine Pasta",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Summer Menu",
+      "name": "Summer Risotto",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Summer Menu",
+      "name": "Assiette de Fruits",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Summer Menu",
+      "name": "Baguette à Raclette",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Summer Menu",
+      "name": "Croquettes (5)",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Appetizers",
+      "name": "Escargot à la Bourguignonne",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Appetizers",
+      "name": "Petite Biscuits & Jam",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Appetizers",
+      "name": "Soupe à l'Oignon",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Appetizers",
+      "name": "Salade de Chèvre Chaud",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Soups & Salads",
+      "name": "Roasted Red Pepper Soup à la Tomate",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Soups & Salads",
+      "name": "Salade de Campagne Française",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Soups & Salads",
+      "name": "Crêpe au Citron et à la Ricotta",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Soups & Salads",
+      "name": "Pain Perdu à la Crème Brûlée",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Entrées",
+      "name": "Coq au Vin",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Entrées",
+      "name": "Steak Frites",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Entrées",
+      "name": "Bouillabaisse",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Entrées",
+      "name": "Confit de Canard",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Pâtes",
+      "name": "Pappardelle Bolognese",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Pâtes",
+      "name": "Ravioli du Jour",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Pâtes",
+      "name": "Spaghetti Carbonara",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Pâtes",
+      "name": "Linguine aux Fruits de Mer",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Poissons & Fruits de Mer",
+      "name": "Saumon Grillé à l'Aneth",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Poissons & Fruits de Mer",
+      "name": "Moules Marinières",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Poissons & Fruits de Mer",
+      "name": "Tartare de Thon",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Poissons & Fruits de Mer",
+      "name": "Homard Thermidor",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Viandes",
+      "name": "Filet Mignon",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Viandes",
+      "name": "Côtelettes d'Agneau",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Viandes",
+      "name": "Porc à la Normande",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Viandes",
+      "name": "Magret de Canard",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Légumes & Accompagnements",
+      "name": "Ratatouille",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Légumes & Accompagnements",
+      "name": "Gratin Dauphinois",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Légumes & Accompagnements",
+      "name": "Haricots Verts Amandine",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Légumes & Accompagnements",
+      "name": "Purée de Pommes de Terre",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Desserts",
+      "name": "Crème Brûlée",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Desserts",
+      "name": "Mousse au Chocolat",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Desserts",
+      "name": "Tarte Tatin",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Desserts",
+      "name": "Profiteroles",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Boissons",
+      "name": "Café Français",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Boissons",
+      "name": "Thé à la Menthe",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Boissons",
+      "name": "Chocolat Chaud",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Boissons",
+      "name": "Vin au Choix",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Brunch Menu · Daily Specials",
+      "name": "Fresh Avocado Toast",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Brunch Menu · Daily Specials",
+      "name": "Eggs Benedict",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Brunch Menu · Daily Specials",
+      "name": "Smoked Salmon Plate",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Brunch Menu · Daily Specials",
+      "name": "Belgian Waffles",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Summer Menu",
+      "name": "Grilled Vegetable Panini",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Summer Menu",
+      "name": "Caprese Salad",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Summer Menu",
+      "name": "Gazpacho",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Summer Menu",
+      "name": "Shrimp Cocktail",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Summer Menu",
+      "name": "Chicken Caesar Wrap",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Appetizers",
+      "name": "Bruschetta",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Appetizers",
+      "name": "Stuffed Mushrooms",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Appetizers",
+      "name": "Calamari Fritti",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Appetizers",
+      "name": "Cheese & Charcuterie Board",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Soups & Salads",
+      "name": "Tomato Basil Soup",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Soups & Salads",
+      "name": "French Onion Soup",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Soups & Salads",
+      "name": "Caesar Salad",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Soups & Salads",
+      "name": "Nicoise Plateau",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Entrées",
+      "name": "Beef Bourguignon",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Entrées",
+      "name": "Dover Sole Meunière",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Entrées",
+      "name": "Pork Tenderloin",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Entrées",
+      "name": "Vegetable Tian",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Pâtes",
+      "name": "Gnocchi al Pesto",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Pâtes",
+      "name": "Fettuccine Alfredo",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Pâtes",
+      "name": "Lasagna",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Pâtes",
+      "name": "Macaroni & Cheese",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Poissons & Fruits de Mer",
+      "name": "Cioppino",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Poissons & Fruits de Mer",
+      "name": "Grilled Swordfish",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Poissons & Fruits de Mer",
+      "name": "Lobster Bisque",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Poissons & Fruits de Mer",
+      "name": "Clams Casino",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Viandes",
+      "name": "Rack of Lamb",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Viandes",
+      "name": "Ribeye Steak",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Viandes",
+      "name": "Pork Chops",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Viandes",
+      "name": "Chicken Marsala",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Légumes & Accompagnements",
+      "name": "Truffle Fries",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Légumes & Accompagnements",
+      "name": "Roasted Brussels Sprouts",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Légumes & Accompagnements",
+      "name": "Buttered Corn",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Légumes & Accompagnements",
+      "name": "Mixed Vegetable Medley",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Desserts",
+      "name": "Chocolate Lava Cake",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Desserts",
+      "name": "Tiramisu",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Desserts",
+      "name": "Cheesecake",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Desserts",
+      "name": "Fruit Tart",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Boissons",
+      "name": "Espresso",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Boissons",
+      "name": "Latte",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Boissons",
+      "name": "Sparkling Water",
+      "description": "",
+      "ingredients": []
+    },
+    {
+      "category": "Boissons",
+      "name": "French 75",
+      "description": "",
+      "ingredients": []
+    }
   ]
 }
