@@ -1,151 +1,119 @@
 // app.js
-// Auto‑discovers restaurant files listed in data/index.json
-(async () => {
-  const dataFolder    = 'data/';
-  const indexUrl      = `${dataFolder}index.json`;
-  let restaurantFiles = [];
+;(async () => {
+  const dataFolder = 'data/';
+  const indexUrl   = `${dataFolder}index.json`;
 
-  // 1. Load master index
+  // 1) load list of filenames
+  let files = [];
   try {
-    restaurantFiles = await fetch(indexUrl)
-      .then(r => r.ok ? r.json() : Promise.reject('index.json not found'));
-  } catch (err) {
-    console.error('Could not load data/index.json:', err);
+    files = await fetch(indexUrl).then(r => {
+      if (!r.ok) throw new Error('index.json not found');
+      return r.json();
+    });
+  } catch (e) {
+    console.error(e);
     return;
   }
 
-  // 2. Fetch all restaurant data
-  const restaurantData = await Promise.all(
-    restaurantFiles.map(fn =>
-      fetch(dataFolder + fn).then(r => r.ok ? r.json() : Promise.reject(fn))
+  // 2) fetch each restaurant’s full JSON
+  const restaurants = await Promise.all(
+    files.map(f =>
+      fetch(dataFolder + f).then(r => r.ok ? r.json() : Promise.reject(f))
     )
   );
 
-  // 3. Grab DOM elements
-  const searchInput     = document.getElementById('restaurantSearch');
+  // 3) grab DOM refs
+  const restaurantInput = document.getElementById('restaurantSearch');
   const nameInput       = document.getElementById('itemSearch');
-  const ingredientInput = document.getElementById('ingredientSearch');
-  const suggestions     = document.getElementById('suggestions');
+  const ingInput        = document.getElementById('ingredientSearch');
   const menuContainer   = document.getElementById('menuContainer');
   const expandBtn       = document.getElementById('expandAll');
   const collapseBtn     = document.getElementById('collapseAll');
   const themeToggle     = document.getElementById('themeToggle');
   const root            = document.documentElement;
 
-  let currentRestaurant = null;
-
-  // Utility: clear active suggestion
-  function clearActive() {
-    suggestions.querySelectorAll('.suggestion-item')
-      .forEach(el => el.classList.remove('active'));
-  }
-
-  // Show list of matching restaurants
-  function showSuggestions(list) {
-    suggestions.innerHTML = list
-      .map(r => `<div class="suggestion-item" data-id="${r.id}">${r.name}</div>`)
-      .join('');
-  }
-
-  // Render the menu items according to current filters
+  // 4) renderMenu: loops all restaurants → items → filters
   function renderMenu() {
-    if (!currentRestaurant) {
-      menuContainer.innerHTML = '';
-      return;
-    }
-    const nameQ = nameInput.value.trim().toLowerCase();
-    const ingQ  = ingredientInput.value.trim().toLowerCase();
+    const rq = restaurantInput.value.trim().toLowerCase();
+    const nq = nameInput      .value.trim().toLowerCase();
+    const iq = ingInput       .value.trim().toLowerCase();
 
-    // Build HTML
-    menuContainer.innerHTML = currentRestaurant.menu
-      .map((item, idx) => {
-        const itemName = item.name.toLowerCase();
-        const ingText  = item.ingredients.join(' ').toLowerCase();
-        // filter by name & ingredient queries
-        if (
-          (nameQ === '' || itemName.includes(nameQ)) &&
-          (ingQ  === '' || ingText.includes(ingQ))
-        ) {
-          return `
-            <div class="menu-item">
-              <div class="item-header">
-                <h3 class="item-name">${item.name}</h3>
-                <button class="toggle-btn" data-idx="${idx}">Ingredients</button>
-              </div>
-              <div class="ingredients-content" data-idx="${idx}" style="display:none;">
-                <ul>
-                  ${item.ingredients.map(ing => `<li>${ing}</li>`).join('')}
-                </ul>
-              </div>
-            </div>
-          `;
-        } else {
-          return '';
-        }
-      })
-      .join('');
+    // build HTML
+    const html = restaurants.map(r => {
+      if (rq && !r.name.toLowerCase().includes(rq)) return '';
+      // filter items
+      const items = r.menu.filter(item => {
+        const inName = !nq || item.name.toLowerCase().includes(nq);
+        const inIng  = !iq || item.ingredients.join(' ').toLowerCase().includes(iq);
+        return inName && inIng;
+      });
+
+      if (!items.length) return '';
+      // map each item to markup
+      const itemsHTML = items.map((item, idx) => `
+        <div class="menu-item">
+          <div class="item-header">
+            <h3 class="item-name">${item.name}</h3>
+            <button class="toggle-btn" data-id="${r.id}-${idx}">Ingredients</button>
+          </div>
+          <div
+            class="ingredients-content"
+            id="ing-${r.id}-${idx}"
+            style="display:none"
+          >
+            <ul>
+              ${item.ingredients.map(i => `<li>${i}</li>`).join('')}
+            </ul>
+          </div>
+        </div>
+      `).join('');
+
+      // wrap in a restaurant section
+      return `
+        <section class="restaurant">
+          <h2>${r.name}</h2>
+          ${itemsHTML}
+        </section>
+      `;
+    }).join('');
+
+    menuContainer.innerHTML = html || '<p>No matching items found.</p>';
   }
 
-  // 4. Event: select a restaurant
-  suggestions.addEventListener('click', e => {
-    if (!e.target.classList.contains('suggestion-item')) return;
-    clearActive();
-    e.target.classList.add('active');
-    currentRestaurant = restaurantData.find(r => r.id === e.target.dataset.id);
-    searchInput.value     = currentRestaurant.name;
-    nameInput.value       = '';
-    ingredientInput.value = '';
-    suggestions.innerHTML = '';
-    renderMenu();
-  });
+  // 5) wire up all three filters
+  [restaurantInput, nameInput, ingInput].forEach(inp =>
+    inp.addEventListener('input', renderMenu)
+  );
 
-  // 5. Search input → show matching restaurants
-  searchInput.addEventListener('input', () => {
-    const q = searchInput.value.trim().toLowerCase();
-    if (q === '') {
-      suggestions.innerHTML = '';
-      return;
-    }
-    const matches = restaurantData.filter(r =>
-      r.name.toLowerCase().includes(q)
-    );
-    showSuggestions(matches);
-  });
+  // 6) expand / collapse
+  expandBtn.addEventListener('click', () =>
+    document.querySelectorAll('.ingredients-content')
+      .forEach(el => el.style.display = 'block')
+  );
+  collapseBtn.addEventListener('click', () =>
+    document.querySelectorAll('.ingredients-content')
+      .forEach(el => el.style.display = 'none')
+  );
 
-  // 6. Re‑render when item‑name or ingredient inputs change
-  nameInput.addEventListener('input', renderMenu);
-  ingredientInput.addEventListener('input', renderMenu);
-
-  // 7. Expand/Collapse all
-  expandBtn.addEventListener('click', () => {
-    menuContainer.querySelectorAll('.ingredients-content')
-      .forEach(c => c.style.display = 'block');
-  });
-  collapseBtn.addEventListener('click', () => {
-    menuContainer.querySelectorAll('.ingredients-content')
-      .forEach(c => c.style.display = 'none');
-  });
-
-  // 8. Toggle individual ingredient lists
+  // 7) individual toggle
   menuContainer.addEventListener('click', e => {
     if (!e.target.classList.contains('toggle-btn')) return;
-    const idx = e.target.dataset.idx;
-    const content = menuContainer.querySelector(
-      `.ingredients-content[data-idx="${idx}"]`
-    );
-    content.style.display = (content.style.display === 'none' || !content.style.display)
-      ? 'block'
-      : 'none';
+    const id = e.target.dataset.id;
+    const box = document.getElementById(`ing-${id}`);
+    box.style.display = (box.style.display === 'none') ? 'block' : 'none';
   });
 
-  // 9. Theme toggle
-  const savedTheme = localStorage.getItem('theme') || 'light';
-  root.setAttribute('data-theme', savedTheme);
-  themeToggle.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+  // 8) theme switch
+  const saved = localStorage.getItem('theme') || 'light';
+  root.setAttribute('data-theme', saved);
+  themeToggle.textContent = (saved === 'light') ? '🌙' : '☀️';
   themeToggle.addEventListener('click', () => {
     const next = root.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
     root.setAttribute('data-theme', next);
     localStorage.setItem('theme', next);
-    themeToggle.textContent = next === 'dark' ? '☀️' : '🌙';
+    themeToggle.textContent = (next === 'light') ? '🌙' : '☀️';
   });
+
+  // 9) initial paint
+  renderMenu();
 })();
