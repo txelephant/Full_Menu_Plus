@@ -19,7 +19,7 @@
   <!-- Tagline, theme toggle, and search -->
   <div class="intro-controls" style="display:flex; align-items:center; justify-content:space-between; max-width:640px; margin:1.5rem auto;">
     <p class="tagline" style="margin:0; font-size:1.2rem; color:var(--contrast-text);">Full ingredient lists for Brownsville eateries</p>
-    <!-- Dark mode toggle moved here -->
+    <!-- Dark mode toggle -->
     <button id="themeToggle" aria-label="Toggle dark mode" class="theme-toggle" style="font-size:1.5rem; background:none; border:none; cursor:pointer;">🌙</button>
   </div>
 
@@ -28,6 +28,11 @@
       <input id="restaurantSearch" placeholder="Search restaurants…" autocomplete="off" />
       <input id="ingredientSearch" placeholder="Filter by ingredient…" autocomplete="off" />
       <div id="suggestions" class="suggestions"></div>
+      <!-- Expand/Collapse All controls -->
+      <div class="batch-toggle">
+        <button id="expandAll" class="batch-btn">Expand All</button>
+        <button id="collapseAll" class="batch-btn">Collapse All</button>
+      </div>
     </div>
     <div id="menuContainer" class="restaurant-list"></div>
   </main>
