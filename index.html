@@ -10,7 +10,7 @@
   />
   <link href="styles.css" rel="stylesheet"/>
 
-  <!-- quick flex layout for search + buttons -->
+  <!-- Override layout so inputs sit in a row, and buttons stay right -->
   <style>
     .controls {
       display: flex;
@@ -21,9 +21,11 @@
       padding: 1rem;
     }
     .search-container {
-      flex: 1 1 60%;
       display: flex;
+      flex-direction: row;
       gap: 0.5rem;
+      flex: 1 1 60%;
+      max-width: none;
     }
     .search-container input {
       flex: 1;
@@ -74,13 +76,14 @@
     <div class="buttons">
       <button id="expandAll">Expand All</button>
       <button id="collapseAll">Collapse All</button>
-      <button id="themeToggle">🌙</button>
+      <button id="themeToggle" aria-label="Toggle theme">🌙</button>
     </div>
   </div>
 
-  <!-- Menus will render here -->
+  <!-- Menu will render here -->
   <main id="menuContainer" class="menu-container"></main>
 
-  <script src="app.js"></script>
+  <!-- make sure this path matches your file structure -->
+  <script src="js/app.js" type="module"></script>
 </body>
 </html>
