@@ -1,4 +1,4 @@
-// js/app.js  — auto‑discovers restaurant files listed in data/index.json
+// js/app.js  — auto‑discovers restaurant files listed in data/index.json
 (async () => {
   const dataFolder = 'data/';
 
@@ -52,8 +52,12 @@
         <div class="restaurant-card">
           <div class="menu-item">
             <h4>${item.name}</h4>
-            <p>${item.description}</p>
-            <p class="ingredients"><strong>Ingredients:</strong> ${item.ingredients.join(', ')}</p>
+            ${item.description
+              ? `<p>${item.description}</p>`
+              : ``}
+            <p class="ingredients">
+              <strong>Ingredients:</strong> ${item.ingredients.join(', ')}
+            </p>
           </div>
         </div>
       `).join('')}
