@@ -1,7 +1,6 @@
 {
   "id": "la-terraza",
   "name": "La Terraza Mexican Restaurant",
-  "image": "images/la-terraza.jpg",
   "menu": [
     {
       "name": "Carne Asada Tacos",
@@ -13,8 +12,7 @@
         "Cilantro",
         "Lime",
         "Salt"
-      ],
-      "price": 8.99
+      ]
     },
     {
       "name": "Chicken Fajitas",
@@ -29,8 +27,7 @@
         "Sour cream",
         "Guacamole",
         "Cheese"
-      ],
-      "price": 11.99
+      ]
     },
     {
       "name": "Queso Fundido",
@@ -42,8 +39,7 @@
         "Poblano pepper",
         "Onion",
         "Corn chips"
-      ],
-      "price": 6.50
+      ]
     }
   ]
 }
