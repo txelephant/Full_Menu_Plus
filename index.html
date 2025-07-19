@@ -8,37 +8,42 @@
   <style>
     body {
       font-family: 'Montserrat', sans-serif;
-      margin: 0; padding: 0;
+      margin: 0;
+      padding: 0;
       background: #f4f4f4;
       color: #333;
     }
     header {
-      background: #005f73;
-      color: #fff;
       text-align: center;
       box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      background: #fff; /* white behind banner */
     }
-    /* Banner image container */
+    /* Banner image container now expands to full image height */
     .banner {
       width: 100%;
-      height: 220px;
-      overflow: hidden;
+      height: auto;
+      overflow: visible;
     }
-    /* Cover the container without distortion */
+    /* Show full image at natural aspect ratio */
     .banner img {
       width: 100%;
-      height: 100%;
-      object-fit: cover;
+      height: auto;
+      object-fit: none;
       display: block;
     }
+    /* Header text styling */
     header h1 {
-      margin: 0.5rem 0 0;
+      margin: 1rem 0 0;
       font-weight: 600;
+      color: #005f73;
     }
     header p {
       margin: 0.25rem 0 1rem;
+      color: #005f73;
     }
-    main { padding: 1rem; }
+    main {
+      padding: 1rem;
+    }
     .search-container {
       max-width: 400px;
       margin: 0 auto 2rem;
@@ -94,13 +99,17 @@
       border-radius: 4px;
       margin-bottom: 0.75rem;
     }
-    .menu-item { margin-bottom: 1.25rem; }
+    .menu-item {
+      margin-bottom: 1.25rem;
+    }
     .menu-item h4 {
       margin: 0 0 0.25rem;
       font-weight: 600;
       color: #005f73;
     }
-    .menu-item p { margin: 0.25rem 0; }
+    .menu-item p {
+      margin: 0.25rem 0;
+    }
     .ingredients {
       font-size: 0.9rem;
       color: #555;
@@ -110,8 +119,8 @@
 <body>
   <header>
     <div class="banner">
-      <!-- Place banner.jpg in an "images" folder next to your HTML -->
-      <img src="images/banner.jpg" alt="Ingredient Insider Banner" />
+      <!-- Drop your banner into images/banner.jpg -->
+      <img src="images/Ingredient Insider Logo.jpg" alt="Ingredient Insider Banner" />
     </div>
     <h1>Ingredient Insider</h1>
     <p>Full ingredient lists for Brownsville eateries</p>
@@ -132,21 +141,7 @@
         name: 'Liberty Kitchen & Oysterette',
         image: 'images/liberty-kitchen.jpg',
         menu: [
-          {
-            name: "Oyster Po' Boy",
-            description: 'Fried oysters with fresh fixings',
-            ingredients: [
-              'Oysters', 'Flour', 'Egg', 'Breadcrumbs', 'Salt', 'Pepper',
-              'Cooking oil', 'Lettuce', 'Tomato', 'Pickles', 'Tartar sauce', 'Baguette roll'
-            ],
-            price: 15.99
-          },
-          {
-            name: 'Chargrilled Oysters',
-            description: 'Oysters baked with garlic butter and cheese',
-            ingredients: ['Oysters', 'Garlic', 'Butter', 'Parmesan cheese', 'Breadcrumbs', 'Parsley', 'Lemon'],
-            price: 12.49
-          }
+          { /* ... */ }
         ]
       },
       {
@@ -154,18 +149,7 @@
         name: "Ridley's Bar-B-Q",
         image: 'images/ridleys-bbq.jpg',
         menu: [
-          {
-            name: 'Brisket Sandwich',
-            description: 'Smoked brisket piled high',
-            ingredients: ['Smoked brisket', 'BBQ sauce', 'Texas toast', 'Pickles', 'Onions'],
-            price: 9.99
-          },
-          {
-            name: 'BBQ Beans',
-            description: 'Sweet and savory baked beans',
-            ingredients: ['Pinto beans', 'Bacon', 'Onion', 'Brown sugar', 'Mustard', 'BBQ sauce', 'Salt', 'Pepper'],
-            price: 4.49
-          }
+          { /* ... */ }
         ]
       },
       {
@@ -173,18 +157,7 @@
         name: 'La Terraza Mexican Restaurant',
         image: 'images/la-terraza.jpg',
         menu: [
-          {
-            name: 'Carne Asada Tacos',
-            description: 'Grilled steak tacos with fresh toppings',
-            ingredients: ['Corn tortillas', 'Flank steak', 'Onion', 'Cilantro', 'Lime', 'Salt'],
-            price: 8.99
-          },
-          {
-            name: 'Chicken Fajitas',
-            description: 'Sizzling chicken with peppers & onions',
-            ingredients: ['Flour tortillas', 'Chicken breast', 'Bell peppers', 'Onion', 'Fajita seasoning', 'Butter', 'Sour cream', 'Guacamole', 'Cheese'],
-            price: 11.99
-          }
+          { /* ... */ }
         ]
       }
     ];
@@ -213,7 +186,6 @@
 
     function renderMenu(restaurant) {
       menuContainer.innerHTML = '';
-      /* Restaurant header card */
       const headerCard = document.createElement('div');
       headerCard.className = 'restaurant-card';
       headerCard.innerHTML = `
@@ -221,8 +193,6 @@
         <h3>${restaurant.name}</h3>
       `;
       menuContainer.appendChild(headerCard);
-
-      /* Menu items */
       restaurant.menu.forEach(item => {
         const itemCard = document.createElement('div');
         itemCard.className = 'restaurant-card';
@@ -239,11 +209,7 @@
 
     searchInput.addEventListener('input', e => {
       const query = e.target.value.toLowerCase().trim();
-      if (!query) {
-        suggestions.innerHTML = '';
-        menuContainer.innerHTML = '';
-        return;
-      }
+      if (!query) { suggestions.innerHTML = ''; menuContainer.innerHTML = ''; return; }
       const filtered = data.filter(r => r.name.toLowerCase().includes(query));
       showSuggestions(filtered);
     });
