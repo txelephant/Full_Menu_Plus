@@ -9,6 +9,32 @@
     rel="stylesheet"
   />
   <link href="styles.css" rel="stylesheet"/>
+
+  <!-- quick flex layout for search + buttons -->
+  <style>
+    .controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 1rem;
+      padding: 1rem;
+    }
+    .search-container {
+      flex: 1 1 60%;
+      display: flex;
+      gap: 0.5rem;
+    }
+    .search-container input {
+      flex: 1;
+      padding: 0.5rem;
+      font-size: 1rem;
+    }
+    .buttons {
+      display: flex;
+      gap: 0.5rem;
+    }
+  </style>
 </head>
 <body>
   <!-- Hero -->
@@ -23,7 +49,7 @@
     </div>
   </header>
 
-  <!-- Controls: Restaurant, Item‑Name & Ingredient Search + Buttons -->
+  <!-- SEARCH + BUTTONS -->
   <div class="controls">
     <div class="search-container">
       <input
@@ -44,16 +70,15 @@
         placeholder="Filter by ingredient…"
         autocomplete="off"
       />
-      <div id="suggestions" class="suggestions"></div>
     </div>
     <div class="buttons">
       <button id="expandAll">Expand All</button>
       <button id="collapseAll">Collapse All</button>
-      <button id="themeToggle" class="theme-toggle">🌙</button>
+      <button id="themeToggle">🌙</button>
     </div>
   </div>
 
-  <!-- Menu will be rendered here -->
+  <!-- Menus will render here -->
   <main id="menuContainer" class="menu-container"></main>
 
   <script src="app.js"></script>
